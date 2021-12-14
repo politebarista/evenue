@@ -8,7 +8,7 @@ class Event {
   final String id;
   final String name;
   final String description;
-  final List<String> imageUrls;
+  final String imageUrl;
   final double oldPrice;
   final double newPrice;
   // final Organizer organizer;
@@ -17,7 +17,7 @@ class Event {
     this.id,
     this.name,
     this.description,
-    this.imageUrls,
+    this.imageUrl,
     this.oldPrice,
     this.newPrice,
     // this.organizer,
