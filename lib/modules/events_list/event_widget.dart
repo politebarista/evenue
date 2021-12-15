@@ -10,8 +10,6 @@ class EventWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.red,
-      width: 150,
-      height: 150,
       child: Column(
         children: [
           Text(event.name),
