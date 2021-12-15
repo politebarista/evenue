@@ -10,8 +10,8 @@ class Event {
   final String description;
   final String imageUrl;
   final double oldPrice;
-  final double newPrice;
-  // final Organizer organizer;
+  final double price;
+  final Organizer organizer;
 
   Event(
     this.id,
@@ -19,8 +19,8 @@ class Event {
     this.description,
     this.imageUrl,
     this.oldPrice,
-    this.newPrice,
-    // this.organizer,
+    this.price,
+    this.organizer,
   );
 
   factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);

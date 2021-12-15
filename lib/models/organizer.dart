@@ -7,7 +7,7 @@ class Organizer {
   final String id;
   final String name;
   final String description;
-  final String inn;
+  final double inn;
   final String contactPersonName;
   final String contactPersonPhone;
   final String contactPersonEmail;

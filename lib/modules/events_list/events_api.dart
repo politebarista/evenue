@@ -9,8 +9,7 @@ class EventsApi {
 
   EventsApi(this._appDef);
 
-  Future<void> getEvents() async {
-    // Future<List<Event>> getEvents() async {
+  Future<List<Event>> getEvents() async {
     final getEventsUrl = 'getEvents';
 
     final response = await http.get(
@@ -18,9 +17,10 @@ class EventsApi {
     );
     final body = jsonDecode(response.body);
     final events = <Event>[];
-    for (var event in body) {
+    for (Map<String, dynamic> event in body) {
       events.add(Event.fromJson(event));
     }
-    print('kakdela');
+
+    return events;
   }
 }
