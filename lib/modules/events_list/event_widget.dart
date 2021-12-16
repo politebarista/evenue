@@ -47,7 +47,12 @@ class EventWidget extends StatelessWidget {
               ),
             ),
             CustomPaddings.v4,
-            Text(event.name),
+            Text(
+              event.name,
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
             CustomPaddings.v4,
             Text(
               event.description,
