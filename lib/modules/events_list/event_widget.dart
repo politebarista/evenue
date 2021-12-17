@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:evenue/common/price_formatter.dart';
+import 'package:evenue/common/ui/common_ui_provider.dart';
 import 'package:evenue/common/ui/constants.dart';
 import 'package:evenue/common/ui/custom_color_scheme.dart';
-import 'package:evenue/common/ui/custom_paddings.dart';
+import 'package:evenue/common/ui/custom_text_styles.dart';
 import 'package:evenue/models/event.dart';
 import 'package:flutter/material.dart';
 
@@ -11,56 +13,84 @@ class EventWidget extends StatelessWidget {
 
   const EventWidget({
     required this.event,
-    this.cardWidth = double.infinity,
+    required this.cardWidth,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double cardHeight = 200;
-
     final double paddingAroundContent = 4;
+    final double paddingAroundInfo = 6;
+    final double contentWidth = cardWidth - (paddingAroundContent * 2);
+    final double contentSection = contentWidth / 3;
 
-    final double imageHeight = (cardHeight - (2 * paddingAroundContent)) / 2;
-    final double imageWidth = (cardWidth - (2 * paddingAroundContent));
+    final double imageWidth = contentSection;
+    final double imageHeight = imageWidth;
 
-    final int descriptionMaxLines = 4;
+    final contentHeight = imageHeight + (paddingAroundContent * 2);
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(defaultBorderRadius),
-      child: Container(
-        padding: EdgeInsets.all(paddingAroundContent),
-        color: CustomColorScheme.primaryColor,
-        width: cardWidth,
-        height: cardHeight,
-        child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
-              child: Image(
-                width: imageWidth,
-                height: imageHeight,
-                fit: BoxFit.cover,
-                image: CachedNetworkImageProvider(
-                  event.imageUrl,
-                ),
+    final int descriptionMaxLines = 3;
+
+    return Container(
+      padding: EdgeInsets.all(paddingAroundContent),
+      decoration: BoxDecoration(
+        color: CustomColorScheme.backgroundColor,
+        borderRadius: BorderRadius.circular(defaultBorderRadius),
+        boxShadow: commonUiProvider.shadow,
+      ),
+      width: cardWidth,
+      height: contentHeight,
+      child: Row(
+        children: [
+          Container(
+            width: contentSection * 2,
+            child: Padding(
+              padding: EdgeInsets.all(paddingAroundInfo),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.calendar_today,
+                        size: 16,
+                        color: CustomColorScheme.primaryColor,
+                      ),
+                      commonUiProvider.paddings.h4,
+                      Text(
+                        'DATE',
+                        style: customTextStyles.cardDate,
+                      ),
+                    ],
+                  ),
+                  Text(event.name,style: customTextStyles.cardTitle,),
+                  Text(
+                    event.description,
+                    style: customTextStyles.cardDescription,
+                    maxLines: descriptionMaxLines,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Spacer(),
+                  Text(
+                    PriceFormatter.getFormattedPrice(event.price),
+                    style: customTextStyles.price,
+                  ),
+                ],
               ),
             ),
-            CustomPaddings.v4,
-            Text(
-              event.name,
-              style: TextStyle(
-                fontSize: 18,
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(defaultBorderRadius - 1),
+            child: Image(
+              width: imageWidth,
+              height: imageHeight,
+              fit: BoxFit.cover,
+              image: CachedNetworkImageProvider(
+                event.imageUrl,
               ),
             ),
-            CustomPaddings.v4,
-            Text(
-              event.description,
-              maxLines: descriptionMaxLines,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

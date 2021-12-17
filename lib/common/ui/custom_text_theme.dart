@@ -36,12 +36,8 @@ class CustomTextTheme {
       subtitle2: _defaultTextTheme.subtitle2!.copyWith(
         color: CustomColorScheme.textColor,
       ),
-      bodyText1: _defaultTextTheme.bodyText1!.copyWith(
-        color: CustomColorScheme.textColor,
-      ),
-      bodyText2: _defaultTextTheme.bodyText2!.copyWith(
-        color: CustomColorScheme.textColor,
-      ),
+      bodyText1: _defaultTextTheme.bodyText1!,
+      bodyText2: _defaultTextTheme.bodyText2!,
       caption: _defaultTextTheme.caption!.copyWith(
         color: CustomColorScheme.textColor,
       ),

@@ -15,7 +15,9 @@ class Evenue extends StatelessWidget {
       theme: customTheme.themeData,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('hello'),
+          title: Center(
+            child: Text('Evenue'),
+          ),
         ),
         body: EventsWidget(),
       ),
