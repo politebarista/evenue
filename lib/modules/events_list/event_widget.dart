@@ -58,11 +58,12 @@ class EventWidget extends StatelessWidget {
                       ),
                       commonUiProvider.paddings.h4,
                       Text(
-                        'DATE',
+                        event.startDate.date,
                         style: customTextStyles.cardDate,
                       ),
                     ],
                   ),
+                  commonUiProvider.paddings.v4,
                   Text(event.name,style: customTextStyles.cardTitle,),
                   Text(
                     event.description,

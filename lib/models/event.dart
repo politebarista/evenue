@@ -1,3 +1,4 @@
+import 'package:evenue/models/event_date.dart';
 import 'package:evenue/models/organizer.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -12,6 +13,8 @@ class Event {
   final double oldPrice;
   final double price;
   final Organizer organizer;
+  final EventDate startDate;
+  final EventDate endDate;
 
   Event(
     this.id,
@@ -21,6 +24,8 @@ class Event {
     this.oldPrice,
     this.price,
     this.organizer,
+    this.startDate,
+    this.endDate,
   );
 
   factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
