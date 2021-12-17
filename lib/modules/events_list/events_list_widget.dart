@@ -14,7 +14,7 @@ class EventsListWidget extends StatelessWidget {
       builder: (context, constraints) {
         return Column(
           children: [
-            commonUiProvider.paddings.v8,
+            commonUiProvider.paddings.v12,
             for (Event e in events) ...[
               EventWidget(
                 event: e,

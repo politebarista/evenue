@@ -4,6 +4,17 @@ import 'package:flutter/material.dart';
 CustomTextStyles customTextStyles = CustomTextStyles();
 
 class CustomTextStyles {
+  TextStyle get title => TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.w600,
+    fontSize: 24,
+  );
+
+  TextStyle get description => TextStyle(
+    color: Colors.black,
+    fontSize: 16
+  );
+
   TextStyle get cardTitle => TextStyle(
     color: Colors.black,
     fontSize: 18,

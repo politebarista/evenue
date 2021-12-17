@@ -7,7 +7,7 @@ class IndentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double padding = 8;
+    final double padding = 12;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: padding),

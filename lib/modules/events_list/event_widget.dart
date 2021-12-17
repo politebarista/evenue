@@ -5,6 +5,7 @@ import 'package:evenue/common/ui/constants.dart';
 import 'package:evenue/common/ui/custom_color_scheme.dart';
 import 'package:evenue/common/ui/custom_text_styles.dart';
 import 'package:evenue/models/event.dart';
+import 'package:evenue/modules/event_details/event_details_widget.dart';
 import 'package:flutter/material.dart';
 
 class EventWidget extends StatelessWidget {
@@ -31,68 +32,83 @@ class EventWidget extends StatelessWidget {
 
     final int descriptionMaxLines = 3;
 
-    return Container(
-      padding: EdgeInsets.all(paddingAroundContent),
-      decoration: BoxDecoration(
-        color: CustomColorScheme.backgroundColor,
-        borderRadius: BorderRadius.circular(defaultBorderRadius),
-        boxShadow: commonUiProvider.shadow,
-      ),
-      width: cardWidth,
-      height: contentHeight,
-      child: Row(
-        children: [
-          Container(
-            width: contentSection * 2,
-            child: Padding(
-              padding: EdgeInsets.all(paddingAroundInfo),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.calendar_today,
-                        size: 16,
-                        color: CustomColorScheme.primaryColor,
-                      ),
-                      commonUiProvider.paddings.h4,
-                      Text(
-                        event.startDate.date,
-                        style: customTextStyles.cardDate,
-                      ),
-                    ],
-                  ),
-                  commonUiProvider.paddings.v4,
-                  Text(event.name,style: customTextStyles.cardTitle,),
-                  Text(
-                    event.description,
-                    style: customTextStyles.cardDescription,
-                    maxLines: descriptionMaxLines,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Spacer(),
-                  Text(
-                    PriceFormatter.getFormattedPrice(event.price),
-                    style: customTextStyles.price,
-                  ),
-                ],
+    return GestureDetector(
+      onTap: () {
+        _navigateToDetails(context);
+      },
+      child: Container(
+        padding: EdgeInsets.all(paddingAroundContent),
+        decoration: BoxDecoration(
+          color: CustomColorScheme.backgroundColor,
+          borderRadius: BorderRadius.circular(defaultBorderRadius),
+          boxShadow: commonUiProvider.shadow,
+        ),
+        width: cardWidth,
+        height: contentHeight,
+        child: Row(
+          children: [
+            Container(
+              width: contentSection * 2,
+              child: Padding(
+                padding: EdgeInsets.all(paddingAroundInfo),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.calendar_today,
+                          size: 16,
+                          color: CustomColorScheme.primaryColor,
+                        ),
+                        commonUiProvider.paddings.h4,
+                        Text(
+                          event.startDate.date,
+                          style: customTextStyles.cardDate,
+                        ),
+                      ],
+                    ),
+                    commonUiProvider.paddings.v4,
+                    Text(
+                      event.name,
+                      style: customTextStyles.cardTitle,
+                    ),
+                    Text(
+                      event.description,
+                      style: customTextStyles.cardDescription,
+                      maxLines: descriptionMaxLines,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Spacer(),
+                    Text(
+                      PriceFormatter.getFormattedPrice(event.price),
+                      style: customTextStyles.price,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(defaultBorderRadius - 1),
-            child: Image(
-              width: imageWidth,
-              height: imageHeight,
-              fit: BoxFit.cover,
-              image: CachedNetworkImageProvider(
-                event.imageUrl,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(defaultBorderRadius - 1),
+              child: Image(
+                width: imageWidth,
+                height: imageHeight,
+                fit: BoxFit.cover,
+                image: CachedNetworkImageProvider(
+                  event.imageUrl,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
+
+  void _navigateToDetails(BuildContext context) => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => EventDetailsWidget(event),
+        ),
+      );
 }
