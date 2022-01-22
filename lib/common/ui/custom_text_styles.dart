@@ -33,4 +33,14 @@ class CustomTextStyles {
   TextStyle get cardDate => TextStyle(
     color: CustomColorScheme.primaryColor,
   );
+
+  TextStyle get coloredButton => TextStyle(
+    color: CustomColorScheme.textColor,
+    fontSize: 18,
+  );
+
+  TextStyle get transparentButton => TextStyle(
+    color: CustomColorScheme.primaryColor,
+    fontSize: 18,
+  );
 }

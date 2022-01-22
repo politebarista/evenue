@@ -17,14 +17,14 @@ class CustomTheme {
           onBackground: Colors.red,
           onSurface: Colors.red,
           surface: Colors.red,
-          secondary: Colors.red,
+          secondary: CustomColorScheme.secondaryColor,
+          onSecondary: CustomColorScheme.backgroundColor,
           brightness: Brightness.light,
           error: Colors.red,
           background: Colors.red,
-          primary: CustomColorScheme.backgroundColor,
-          onPrimary: CustomColorScheme.primaryColor,
+          primary: CustomColorScheme.primaryColor,
+          onPrimary: CustomColorScheme.backgroundColor,
           onError: Colors.red,
-          onSecondary: Colors.green,
         ),
       );
 }

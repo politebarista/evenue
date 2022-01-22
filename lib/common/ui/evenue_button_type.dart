@@ -1,0 +1,4 @@
+enum EvenueButtonType {
+  colored,
+  transparent,
+}
