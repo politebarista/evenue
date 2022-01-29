@@ -1,6 +1,7 @@
 import 'package:evenue/common/ui/custom_text_theme.dart';
 import 'package:evenue/common/ui/custom_theme.dart';
 import 'package:evenue/modules/events_list/events_widget.dart';
+import 'package:evenue/modules/login/login_widget.dart';
 import 'package:flutter/material.dart';
 
 class Evenue extends StatelessWidget {
@@ -19,7 +20,7 @@ class Evenue extends StatelessWidget {
             child: Text('Evenue'),
           ),
         ),
-        body: EventsWidget(),
+        body: LoginWidget(),
       ),
     );
   }
