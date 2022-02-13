@@ -17,15 +17,15 @@ class UserRepository {
 
     final response = await http.post(
       Uri.parse(_appDef.baseUrl + loginUserUrl),
+      headers: {'Content-Type': 'application/json; charset=UTF-8'},
       body: jsonEncode(<String, String>{
         'email': email,
         'password': PasswordHelper.hash(password),
       }),
     );
 
-    final body = jsonDecode(response.body);
-    print(body);
-    print(body is int);
+    final String body = jsonDecode(response.body);
+
     if (body != StatusCode.userDontExist &&
         body != StatusCode.incorrectPassword) {
       final prefs = await SharedPreferences.getInstance();
