@@ -20,7 +20,7 @@ class Evenue extends StatelessWidget {
             child: Text('Evenue'),
           ),
         ),
-        body: LoginWidget(),
+        body: EventsWidget(),
       ),
     );
   }

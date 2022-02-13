@@ -14,6 +14,8 @@ class EventDate {
   final String minutes;
   final String seconds;
 
+  int get sortingDate => int.parse('$year$month$day$hours$minutes$seconds');
+
   EventDate(
     this.dateTime,
     this.date,
