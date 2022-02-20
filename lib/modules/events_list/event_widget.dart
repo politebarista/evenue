@@ -72,6 +72,8 @@ class EventWidget extends StatelessWidget {
                     Text(
                       event.name,
                       style: customTextStyles.cardTitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       event.description,

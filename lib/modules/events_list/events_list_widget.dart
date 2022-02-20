@@ -1,4 +1,4 @@
-import 'package:evenue/common/ui/common_ui_provider.dart';
+import 'package:evenue/common/ui/indent_widget.dart';
 import 'package:evenue/models/event.dart';
 import 'package:evenue/modules/events_list/event_widget.dart';
 import 'package:flutter/material.dart';
@@ -10,21 +10,19 @@ class EventsListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Column(
-          children: [
-            commonUiProvider.paddings.v12,
-            for (Event e in events) ...[
-              EventWidget(
-                event: e,
-                cardWidth: constraints.maxWidth,
-              ),
-              commonUiProvider.paddings.v8,
-            ],
-          ],
-        );
-      },
+    return ListView.builder(
+      itemBuilder: (context, index) => IndentWidget(
+        child: LayoutBuilder(
+          builder: (context, constraints) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: EventWidget(
+              event: events[index],
+              cardWidth: constraints.maxWidth,
+            ),
+          ),
+        ),
+      ),
+      itemCount: events.length,
     );
   }
 }
