@@ -20,9 +20,9 @@ class EventsBloc extends Bloc<EventsEvent, EventsState> {
     on<SortEventsEvent>(_sortEvents);
   }
 
-  _getEvents(GetEventsEvent _, Emitter<EventsState> emit) async {
+  _getEvents(GetEventsEvent event, Emitter<EventsState> emit) async {
     try {
-      final events = await _api.getEvents();
+      final events = await _api.getEvents(cityId: event.cityId);
 
       emit(EventsDefaultState(events));
     } catch (e) {
