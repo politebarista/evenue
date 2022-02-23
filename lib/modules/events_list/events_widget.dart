@@ -34,6 +34,18 @@ class EventsWidget extends StatelessWidget {
                           child: Text('sort by date asc'),
                         ),
                       ),
+                      Container(
+                        color: Colors.green,
+                        child: MaterialButton(
+                          onPressed: () => context.read<EventsBloc>().add(
+                            SortEventsEvent(
+                              state.events,
+                              EventSortingByDate(isAscending: false),
+                            ),
+                          ),
+                          child: Text('sort by date desc'),
+                        ),
+                      ),
                     ],
                   ),
                   Expanded(

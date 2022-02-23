@@ -2,8 +2,18 @@ import 'package:evenue/event_sorting/event_sorting.dart';
 import 'package:evenue/models/event.dart';
 
 class EventSortingByDate extends EventSorting {
-  /// It's a quick sorting
+  final bool isAscending;
+
+  EventSortingByDate({this.isAscending = true});
+
   List<Event> sort(List<Event> events) {
+    final sortedEvents = _sort(events);
+
+    return isAscending ? sortedEvents : sortedEvents.reversed.toList();
+  }
+
+  /// It's a quick sorting
+  List<Event> _sort(List<Event> events) {
     if (events.length < 2) {
       return events;
     }
@@ -24,6 +34,6 @@ class EventSortingByDate extends EventSorting {
       }
     }
 
-    return sort(lessValues) + [events[pivot]] + sort(largerValues);
+    return _sort(lessValues) + [events[pivot]] + _sort(largerValues);
   }
 }
