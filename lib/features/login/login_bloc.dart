@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:evenue/modules/login/user_repository.dart';
+import 'package:evenue/features/login/user_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'login_event.dart';

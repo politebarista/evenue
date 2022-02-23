@@ -2,7 +2,7 @@ import 'package:evenue/common/ui/indent_widget.dart';
 import 'package:evenue/event_sorting/event_sorting_by_date.dart';
 import 'package:evenue/event_sorting/event_sorting_by_name.dart';
 import 'package:evenue/event_sorting/event_sorting_by_price.dart';
-import 'package:evenue/modules/events_list/event_widget.dart';
+import 'package:evenue/features/events_list/event_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 

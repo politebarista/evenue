@@ -1,6 +1,6 @@
 import 'package:evenue/common/ui/pending_widget.dart';
-import 'package:evenue/modules/events_list/events_bloc.dart';
-import 'package:evenue/modules/events_list/events_list_widget.dart';
+import 'package:evenue/features/events_list/events_bloc.dart';
+import 'package:evenue/features/events_list/events_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

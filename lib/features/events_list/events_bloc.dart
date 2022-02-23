@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:evenue/common/config.dart';
 import 'package:evenue/event_sorting/event_sorting.dart';
 import 'package:evenue/models/event.dart';
-import 'package:evenue/modules/events_list/events_api.dart';
+import 'package:evenue/features/events_list/events_api.dart';
 import 'package:meta/meta.dart';
 
 part 'events_event.dart';
