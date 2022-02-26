@@ -36,17 +36,18 @@ class CityChoiceScreen extends StatelessWidget {
                         style: customTextStyles.title,
                       ),
                     ),
+                    RowButton(
+                      text: 'Все города',
+                      onTap: () => _chooseCity(context, null),
+                    ),
                     Expanded(
                       child: ListView.builder(
                         itemCount: state.cities.length,
                         itemBuilder: (context, index) => RowButton(
                           text: state.cities[index].name,
-                          onTap: () => Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (_) => EventsWidget(
-                                cityId: state.cities[index].id,
-                              ),
-                            ),
+                          onTap: () => _chooseCity(
+                            context,
+                            state.cities[index].id,
                           ),
                         ),
                       ),
@@ -62,4 +63,13 @@ class CityChoiceScreen extends StatelessWidget {
       ),
     );
   }
+
+  _chooseCity(BuildContext context, String? cityId) =>
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (_) => EventsWidget(
+            cityId: cityId,
+          ),
+        ),
+      );
 }

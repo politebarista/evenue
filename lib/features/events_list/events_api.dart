@@ -16,7 +16,7 @@ class EventsApi {
 
     final requestBody = cityId != null ? jsonEncode(<String, String>{
       'cityId': cityId,
-    }) : null;
+    }) : '{}';
     final response = await http.post(
       Uri.parse(_appDef.baseUrl + getEventsUrl),
       headers: {'Content-Type': 'application/json; charset=UTF-8'},
