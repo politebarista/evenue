@@ -30,66 +30,70 @@ class EventDetailsWidget extends StatelessWidget {
       ),
       body: IndentWidget(
         child: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                event.name,
-                style: customTextStyles.title,
-              ),
-              commonUiProvider.paddings.v8,
-              ClipRRect(
-                borderRadius: BorderRadius.circular(defaultBorderRadius - 1),
-                child: Image(
-                  fit: BoxFit.cover,
-                  image: CachedNetworkImageProvider(
-                    event.imageUrl,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                commonUiProvider.paddings.v8,
+                Text(
+                  event.name,
+                  style: customTextStyles.title,
+                ),
+                commonUiProvider.paddings.v8,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(defaultBorderRadius - 1),
+                  child: Image(
+                    fit: BoxFit.cover,
+                    image: CachedNetworkImageProvider(
+                      event.imageUrl,
+                    ),
                   ),
                 ),
-              ),
-              commonUiProvider.paddings.v8,
-              commonUiProvider.divider,
-              commonUiProvider.paddings.v8,
-              Text(
-                event.description,
-                style: customTextStyles.description,
-              ),
-              commonUiProvider.paddings.v16,
-              Row(
-                children: [
-                  Icon(
-                    Icons.event,
-                    color: CustomColorScheme.primaryColor,
-                  ),
-                  commonUiProvider.paddings.h8,
-                  Text(
-                    EventDateHelper.getDurationBetween(
-                      event.startDate,
-                      event.endDate,
-                    ),
-                    style: customTextStyles.description.copyWith(
+                commonUiProvider.paddings.v8,
+                commonUiProvider.divider,
+                commonUiProvider.paddings.v8,
+                Text(
+                  event.description,
+                  style: customTextStyles.description,
+                ),
+                commonUiProvider.paddings.v16,
+                Row(
+                  children: [
+                    Icon(
+                      Icons.event,
                       color: CustomColorScheme.primaryColor,
                     ),
-                  ),
-                ],
-              ),
-              commonUiProvider.paddings.v8,
-              Row(
-                children: [
-                  Icon(
-                    Icons.paid_outlined,
-                    color: CustomColorScheme.primaryColor,
-                  ),
-                  commonUiProvider.paddings.h8,
-                  Text(
-                    PriceFormatter.getFormattedPrice(event.price),
-                    style: customTextStyles.description.copyWith(
+                    commonUiProvider.paddings.h8,
+                    Text(
+                      EventDateHelper.getDurationBetween(
+                        event.startDate,
+                        event.endDate,
+                      ),
+                      style: customTextStyles.description.copyWith(
+                        color: CustomColorScheme.primaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+                commonUiProvider.paddings.v8,
+                Row(
+                  children: [
+                    Icon(
+                      Icons.paid_outlined,
                       color: CustomColorScheme.primaryColor,
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    commonUiProvider.paddings.h8,
+                    Text(
+                      PriceFormatter.getFormattedPrice(event.price),
+                      style: customTextStyles.description.copyWith(
+                        color: CustomColorScheme.primaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+                commonUiProvider.paddings.v8,
+              ],
+            ),
           ),
         ),
       ),

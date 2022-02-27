@@ -4,7 +4,6 @@ import 'package:evenue/common/definition/app_definition.dart';
 import 'package:evenue/models/event.dart';
 import 'package:http/http.dart' as http;
 
-
 // TODO: Reform the api into a repository
 class EventsApi {
   final AppDefinition _appDef;
@@ -14,9 +13,9 @@ class EventsApi {
   Future<List<Event>> getEvents({String? cityId}) async {
     final getEventsUrl = 'getEvents';
 
-    final requestBody = cityId != null ? jsonEncode(<String, String>{
+    final requestBody = jsonEncode(<String, dynamic>{
       'cityId': cityId,
-    }) : '{}';
+    });
     final response = await http.post(
       Uri.parse(_appDef.baseUrl + getEventsUrl),
       headers: {'Content-Type': 'application/json; charset=UTF-8'},
