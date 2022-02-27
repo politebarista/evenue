@@ -4,13 +4,16 @@ import 'package:evenue/common/config.dart';
 import 'package:evenue/common/definition/app_definition.dart';
 import 'package:evenue/common/password_helper.dart';
 import 'package:evenue/common/status_code.dart';
+import 'package:evenue/stores/user_store.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-const userIdKey = 'userId';
-
 class UserRepository {
+  final UserStore _userStore;
+
   final AppDefinition _appDef = Config.appDef;
+
+  UserRepository(this._userStore);
 
   Future<bool> login(String email, String password) async {
     final loginUserUrl = 'loginUser';
@@ -28,8 +31,8 @@ class UserRepository {
 
     if (body != StatusCode.userDontExist &&
         body != StatusCode.incorrectPassword) {
-      final prefs = await SharedPreferences.getInstance();
-      return await prefs.setString(userIdKey, body);
+      _userStore.setUserId(userIdKey);
+      return true;
     } else {
       // TODO maybe I need to put here logging
       return false;

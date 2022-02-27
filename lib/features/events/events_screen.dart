@@ -1,14 +1,14 @@
 import 'package:evenue/common/ui/pending_widget.dart';
 import 'package:evenue/features/city_choice/city_choice_screen.dart';
-import 'package:evenue/features/events_list/events_bloc.dart';
-import 'package:evenue/features/events_list/events_list_widget.dart';
+import 'package:evenue/features/events/events_bloc.dart';
+import 'package:evenue/features/events/events_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class EventsWidget extends StatelessWidget {
-  final String? cityId;
+class EventsScreen extends StatelessWidget {
+  final String cityId;
 
-  const EventsWidget({this.cityId, Key? key}) : super(key: key);
+  const EventsScreen(this.cityId, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:evenue/features/city_choice/cities_repository.dart';
+import 'package:evenue/features/city_choice/city_choice_user_store.dart';
+import 'package:evenue/repositories/cities_repository.dart';
 import 'package:evenue/models/city.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,10 +10,14 @@ part 'city_choice_event.dart';
 part 'city_choice_state.dart';
 
 class CityChoiceBloc extends Bloc<CityChoiceEvent, CityChoiceState> {
+  final CityChoiceUserStore _userStore;
   final CitiesRepository _citiesRepository;
 
-  CityChoiceBloc(CitiesRepository citiesRepository)
-      : _citiesRepository = citiesRepository,
+  CityChoiceBloc(
+    CityChoiceUserStore userStore,
+    CitiesRepository citiesRepository,
+  )   : _userStore = userStore,
+        _citiesRepository = citiesRepository,
         super(CityChoicePendingState()) {
     on<CityChoiceLoadCitiesEvent>(_load);
     on<CityChoiceSaveSelectedCityEvent>(_saveSelectedCity);
@@ -28,10 +33,8 @@ class CityChoiceBloc extends Bloc<CityChoiceEvent, CityChoiceState> {
     Emitter<CityChoiceState> emit,
   ) async {
     emit(CityChoicePendingState());
-    
-    // TODO: put in the user store
-    final sharedPrefs = await SharedPreferences.getInstance();
-    await sharedPrefs.setString('selectedCity', event.cityId);
+
+    await _userStore.setSelectedCityId(event.cityId);
 
     emit(CityChoiceLoadEventsState(event.cityId));
   }

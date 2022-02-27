@@ -1,7 +1,5 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-import 'package:evenue/features/login/user_repository.dart';
+import 'package:evenue/repositories/user_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'login_event.dart';
@@ -9,9 +7,11 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final UserRepository _userRepository = UserRepository();
+  final UserRepository _userRepository;
 
-  LoginBloc() : super(LoginInitialState()) {
+  LoginBloc(UserRepository userRepository)
+      : this._userRepository = userRepository,
+        super(LoginInitialState()) {
     on<LoginUserEvent>(_loginUserHandler);
   }
 

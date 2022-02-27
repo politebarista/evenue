@@ -1,7 +1,6 @@
 import 'package:evenue/common/ui/custom_text_theme.dart';
 import 'package:evenue/common/ui/custom_theme.dart';
-import 'package:evenue/features/city_choice/city_choice_screen.dart';
-import 'package:evenue/features/events_list/events_widget.dart';
+import 'package:evenue/features/init/init_screen.dart';
 import 'package:flutter/material.dart';
 
 class Evenue extends StatelessWidget {
@@ -14,8 +13,7 @@ class Evenue extends StatelessWidget {
 
     return MaterialApp(
       theme: customTheme.themeData,
-      home: CityChoiceScreen(),
-      // home: EventsWidget(),
+      home: InitScreen(),
     );
   }
 }
