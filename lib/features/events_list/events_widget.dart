@@ -1,4 +1,5 @@
 import 'package:evenue/common/ui/pending_widget.dart';
+import 'package:evenue/features/city_choice/city_choice_screen.dart';
 import 'package:evenue/features/events_list/events_bloc.dart';
 import 'package:evenue/features/events_list/events_list_widget.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,22 @@ class EventsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Evenue')),
+      appBar: AppBar(
+        title: Text('Evenue'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: GestureDetector(
+              child: Icon(Icons.location_on_outlined),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => CityChoiceScreen(),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: BlocProvider(
         create: (context) => EventsBloc()..add(GetEventsEvent(cityId)),
         child: Scaffold(

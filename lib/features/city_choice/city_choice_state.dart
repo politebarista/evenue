@@ -10,3 +10,9 @@ class CityChoiceDefaultState extends CityChoiceState {
 
   CityChoiceDefaultState(this.cities);
 }
+
+class CityChoiceLoadEventsState extends CityChoiceState {
+  final String cityId;
+
+  CityChoiceLoadEventsState(this.cityId);
+}

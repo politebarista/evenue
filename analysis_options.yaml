@@ -33,7 +33,9 @@ dart_code_metrics:
     - no-object-declaration
     - prefer-conditional-expressions
     - prefer-correct-type-name
-    - prefer-extracting-callbacks
+    - prefer-extracting-callbacks:
+        ignored-named-arguments:
+          - listener
     - prefer-first
     - prefer-last
     - prefer-match-file-name

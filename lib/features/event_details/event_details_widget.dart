@@ -22,7 +22,7 @@ class EventDetailsWidget extends StatelessWidget {
         actions: [
           Icon(
             Icons.star_outline_rounded,
-            color: CustomColorScheme.primaryColor,
+            color: CustomColorScheme.backgroundColor,
             size: 30,
           ),
           commonUiProvider.paddings.h12,

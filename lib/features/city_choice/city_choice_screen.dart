@@ -19,8 +19,12 @@ class CityChoiceScreen extends StatelessWidget {
         /// TODO: bring the initialization of the repository into the
         /// initialization module
         create: (_) => CityChoiceBloc(CitiesRepository(Config.appDef))
-          ..add(CityChoiceLoadEvent()),
-        child: BlocBuilder<CityChoiceBloc, CityChoiceState>(
+          ..add(CityChoiceLoadCitiesEvent()),
+        child: BlocConsumer<CityChoiceBloc, CityChoiceState>(
+          listenWhen: (_, current) => current is CityChoiceLoadEventsState,
+          buildWhen: (_, current) =>
+              current is CityChoicePendingState ||
+              current is CityChoiceDefaultState,
           builder: (context, state) {
             if (state is CityChoicePendingState) {
               return Center(child: PendingWidget());
@@ -38,7 +42,8 @@ class CityChoiceScreen extends StatelessWidget {
                     ),
                     RowButton(
                       text: 'Все города',
-                      onTap: () => _chooseCity(context, null),
+                      // TODO: replace the value for any city
+                      onTap: () => _chooseCity(context, 'Any'),
                     ),
                     Expanded(
                       child: ListView.builder(
@@ -59,17 +64,28 @@ class CityChoiceScreen extends StatelessWidget {
               throw UnimplementedError();
             }
           },
+          listener: (context, state) {
+            if (state is CityChoiceLoadEventsState) {
+              Navigator.of(context)
+                ..popUntil((route) => route.isFirst)
+                ..pushReplacement(
+                  MaterialPageRoute(
+                    builder: (_) => EventsWidget(
+                      cityId: state.cityId,
+                    ),
+                  ),
+                );
+            } else {
+              throw UnimplementedError();
+            }
+          },
         ),
       ),
     );
   }
 
-  _chooseCity(BuildContext context, String? cityId) =>
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (_) => EventsWidget(
-            cityId: cityId,
-          ),
-        ),
-      );
+  _chooseCity(BuildContext context, String cityId) =>
+      context.read<CityChoiceBloc>().add(
+            CityChoiceSaveSelectedCityEvent(cityId),
+          );
 }
