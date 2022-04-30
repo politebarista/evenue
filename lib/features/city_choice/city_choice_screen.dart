@@ -1,10 +1,8 @@
-import 'package:evenue/common/config.dart';
 import 'package:evenue/common/ui/custom_text_styles.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
 import 'package:evenue/common/ui/row_button.dart';
-import 'package:evenue/repositories/cities_repository.dart';
+import 'package:evenue/features/navigation_controller/navigation_controller_widget.dart';
 import 'package:evenue/features/city_choice/city_choice_bloc.dart';
-import 'package:evenue/features/events/events_screen.dart';
 import 'package:evenue/stores/repositories_store.dart';
 import 'package:evenue/stores/user_store.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +70,7 @@ class CityChoiceScreen extends StatelessWidget {
                 ..popUntil((route) => route.isFirst)
                 ..pushReplacement(
                   MaterialPageRoute(
-                    builder: (_) => EventsScreen(state.cityId),
+                    builder: (_) => NavigationControllerWidget(),
                   ),
                 );
             } else {
