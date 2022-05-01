@@ -7,6 +7,4 @@ class LoginInitialState extends LoginState {}
 
 class LoginPendingState extends LoginState {}
 
-class LoginSuccessState extends LoginState {}
-
 class LoginFailureState extends LoginState {}

@@ -10,8 +10,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRepository {
   final UserStore _userStore;
-
   final AppDefinition _appDef = Config.appDef;
+
+  bool get isUserAuthorized => _userStore.userId != null;
 
   UserRepository(this._userStore);
 
@@ -38,4 +39,6 @@ class UserRepository {
       return false;
     }
   }
+
+  Future<void> logout() => _userStore.setUserId(null);
 }

@@ -1,6 +1,7 @@
 import 'package:evenue/common/ui/custom_text_field.dart';
 import 'package:evenue/common/ui/evenue_button.dart';
 import 'package:evenue/features/login/login_bloc.dart';
+import 'package:evenue/features/user_profile/user_profile_bloc.dart';
 import 'package:evenue/stores/repositories_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,12 +32,12 @@ class _LoginScreenState extends State<LoginScreen> {
       child: BlocProvider(
         create: (_) => LoginBloc(
           context.read<RepositoriesStore>().userRepository,
+          context.read<UserProfileBloc>(),
         ),
         child: BlocConsumer<LoginBloc, LoginState>(
           buildWhen: (_, current) =>
               current is LoginPendingState || current is LoginInitialState,
-          listenWhen: (_, current) =>
-              current is LoginSuccessState || current is LoginFailureState,
+          listenWhen: (_, current) => current is LoginFailureState,
           builder: (context, state) {
             return Container(
               padding: const EdgeInsets.all(16),
@@ -62,9 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           },
           listener: (context, state) {
-            if (state is LoginSuccessState) {
-              print('u in');
-            } else if (state is LoginFailureState) {
+            if (state is LoginFailureState) {
               print('failure');
             } else {
               throw UnimplementedError();

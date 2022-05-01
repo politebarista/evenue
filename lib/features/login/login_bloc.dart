@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:evenue/features/user_profile/user_profile_bloc.dart';
 import 'package:evenue/repositories/user_repository.dart';
 import 'package:meta/meta.dart';
 
@@ -8,9 +9,11 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository _userRepository;
+  final UserProfileBloc _userProfileBloc;
 
-  LoginBloc(UserRepository userRepository)
+  LoginBloc(UserRepository userRepository, UserProfileBloc userProfileBloc)
       : this._userRepository = userRepository,
+        this._userProfileBloc = userProfileBloc,
         super(LoginInitialState()) {
     on<LoginUserEvent>(_loginUserHandler);
   }
@@ -21,7 +24,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       event.password,
     );
     if (isUserLoggedIn) {
-      emit(LoginSuccessState());
+      _userProfileBloc.add(CheckAuthorizationUserProfileEvent());
     } else {
       emit(LoginFailureState());
     }
