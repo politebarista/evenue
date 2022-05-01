@@ -4,6 +4,7 @@ import 'package:evenue/common/config.dart';
 import 'package:evenue/common/definition/app_definition.dart';
 import 'package:evenue/common/password_helper.dart';
 import 'package:evenue/common/status_code.dart';
+import 'package:evenue/models/user.dart';
 import 'package:evenue/stores/user_store.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +13,7 @@ class UserRepository {
   final UserStore _userStore;
   final AppDefinition _appDef = Config.appDef;
 
-  bool get isUserAuthorized => _userStore.userId != null;
+  bool get isUserAuthorized => _userStore.user != null;
 
   UserRepository(this._userStore);
 
@@ -28,17 +29,18 @@ class UserRepository {
       }),
     );
 
-    final String body = jsonDecode(response.body);
+    final body = jsonDecode(response.body);
 
-    if (body != StatusCode.userDontExist &&
-        body != StatusCode.incorrectPassword) {
-      _userStore.setUserId(userIdKey);
-      return true;
-    } else {
+    if (body == StatusCode.userDontExist ||
+        body == StatusCode.incorrectPassword) {
       // TODO maybe I need to put here logging
       return false;
+    } else {
+      final user = User.fromJson(body);
+      _userStore.setUser(user);
+      return true;
     }
   }
 
-  Future<void> logout() => _userStore.setUserId(null);
+  Future<void> logout() => _userStore.setUser(null);
 }

@@ -1,7 +1,7 @@
+import 'package:evenue/common/ui/pending_widget.dart';
 import 'package:evenue/features/login/login_screen.dart';
 import 'package:evenue/features/user_profile/user_profile_bloc.dart';
 import 'package:evenue/stores/repositories_store.dart';
-import 'package:evenue/stores/user_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -11,37 +11,36 @@ class UserProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => UserProfileBloc(
-        context.read<RepositoriesStore>().userRepository,
-      ),
-      child: BlocBuilder<UserProfileBloc, UserProfileState>(
-        builder: (context, state) {
-          if (state is NotAuthorizedUserProfileState) {
-            return LoginScreen();
-          } else if (state is AuthorizedUserProfileState) {
-            return SafeArea(
-              child: Scaffold(
-                body: Column(
+    return SafeArea(
+      child: Scaffold(
+        body: BlocProvider(
+          create: (_) => UserProfileBloc(
+            context.read<RepositoriesStore>().userRepository,
+          )..add(CheckAuthorizationUserProfileEvent()),
+          child: BlocBuilder<UserProfileBloc, UserProfileState>(
+            builder: (context, state) {
+              if (state is NotAuthorizedUserProfileState) {
+                return LoginScreen();
+              } else if (state is PendingUserProfileState) {
+                return PendingWidget();
+              } else if (state is AuthorizedUserProfileState) {
+                return Column(
                   children: [
                     Text('вы уже авторизованы'),
                     MaterialButton(
-                      onPressed: () {
-                        print('log out');
-                        context.read<UserProfileBloc>().add(
-                              LogOutUserProfileEvent(),
-                            );
-                      },
-                      child: Text('Log out'),
+                      onPressed: () => context.read<UserProfileBloc>().add(
+                            LogOutUserProfileEvent(),
+                          ),
+                      child: Text('Выйти'),
                     ),
                   ],
-                ),
-              ),
-            );
-          } else {
-            throw UnimplementedError();
-          }
-        },
+                );
+              } else {
+                throw UnimplementedError();
+              }
+            },
+          ),
+        ),
       ),
     );
   }

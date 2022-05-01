@@ -1,43 +1,52 @@
+import 'dart:convert';
+
 import 'package:evenue/features/city_choice/city_choice_user_store.dart';
+import 'package:evenue/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const userIdKey = 'userId';
+const userKey = 'user';
 const selectedCityKey = 'selectedCity';
 
 /// Before using the class, it must be opened using the [open] method
 class UserStore extends CityChoiceUserStore {
   late final SharedPreferences _sharedPrefs;
 
-  String? _userId;
+  User? _user;
   String? _selectedCityId;
 
-  String? get userId => _userId;
+  User? get user => _user;
+
   String? get selectedCityId => _selectedCityId;
 
   Future<void> open() async {
     _sharedPrefs = await SharedPreferences.getInstance();
 
-    _userId = _sharedPrefs.getString(userIdKey);
+    _user = _sharedPrefs.getString(userKey) != null
+        ? jsonDecode(_sharedPrefs.getString(userKey)!)
+        : null;
     _selectedCityId = _sharedPrefs.getString(selectedCityKey);
   }
 
-  Future<void> setUserId(final String? userId) async {
-    _setPrefsValue(userIdKey, userId);
-    _userId = userId;
+  Future<void> setUser(final User? user) async {
+    await _setPrefsValue(userKey, jsonEncode(user));
+    _user = user;
   }
 
   Future<void> setSelectedCityId(final String? selectedCityId) async {
-    _setPrefsValue(selectedCityKey, selectedCityId);
+    await _setPrefsValue(selectedCityKey, selectedCityId);
     _selectedCityId = selectedCityId;
   }
 
-  void _setPrefsValue(final String valueKey, final String? value) {
+  Future<void> _setPrefsValue(
+    final String valueKey,
+    final String? value,
+  ) async {
     if (value == null) {
       // ignore: avoid-ignoring-return-values
-      _sharedPrefs.remove(valueKey);
+      await _sharedPrefs.remove(valueKey);
     } else {
       // ignore: avoid-ignoring-return-values
-      _sharedPrefs.setString(valueKey, value);
+      await _sharedPrefs.setString(valueKey, value);
     }
   }
 }
