@@ -1,5 +1,6 @@
 import 'package:evenue/common/ui/custom_text_field.dart';
 import 'package:evenue/common/ui/evenue_button.dart';
+import 'package:evenue/common/ui/pending_widget.dart';
 import 'package:evenue/features/customer_login/customer_login_bloc.dart';
 import 'package:evenue/features/user_profile/user_profile_bloc.dart';
 import 'package:evenue/stores/repositories_store.dart';
@@ -36,31 +37,44 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
         ),
         child: BlocConsumer<CustomerLoginBloc, CustomerLoginState>(
           buildWhen: (_, current) =>
-              current is CustomerLoginPendingState || current is CustomerLoginInitialState,
+              current is CustomerLoginPendingState ||
+              current is CustomerLoginInitialState,
           listenWhen: (_, current) => current is CustomerLoginFailureState,
           builder: (context, state) {
-            return Container(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  Text('authorization'),
-                  const SizedBox(height: 8),
-                  CustomTextField(controller: _emailTextController),
-                  const SizedBox(height: 8),
-                  CustomTextField(controller: _passwordTextController),
-                  const SizedBox(height: 8),
-                  EvenueButton(
-                    onTap: () => context.read<CustomerLoginBloc>().add(
-                          LoginUserEvent(
-                            _emailTextController.text,
-                            _passwordTextController.text,
+            if (state is CustomerLoginPendingState) {
+              return LayoutBuilder(builder: (context, constraints) {
+                return SizedBox(
+                  width: constraints.maxWidth,
+                  height: constraints.maxHeight,
+                  child: Center(child: PendingWidget()),
+                );
+              });
+            } else if (state is CustomerLoginInitialState) {
+              return Container(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    Text('authorization'),
+                    const SizedBox(height: 8),
+                    CustomTextField(controller: _emailTextController),
+                    const SizedBox(height: 8),
+                    CustomTextField(controller: _passwordTextController),
+                    const SizedBox(height: 8),
+                    EvenueButton(
+                      onTap: () => context.read<CustomerLoginBloc>().add(
+                            LoginCustomerEvent(
+                              _emailTextController.text,
+                              _passwordTextController.text,
+                            ),
                           ),
-                        ),
-                    text: 'Login',
-                  ),
-                ],
-              ),
-            );
+                      text: 'Login',
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              throw UnimplementedError();
+            }
           },
           listener: (context, state) {
             if (state is CustomerLoginFailureState) {

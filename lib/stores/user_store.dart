@@ -22,13 +22,16 @@ class UserStore extends CityChoiceUserStore {
     _sharedPrefs = await SharedPreferences.getInstance();
 
     _customer = _sharedPrefs.getString(customerKey) != null
-        ? jsonDecode(_sharedPrefs.getString(customerKey)!)
+        ? Customer.fromJson(jsonDecode(_sharedPrefs.getString(customerKey)!))
         : null;
     _selectedCityId = _sharedPrefs.getString(selectedCityKey);
   }
 
   Future<void> setCustomer(final Customer? customer) async {
-    await _setPrefsValue(customerKey, jsonEncode(customer));
+    await _setPrefsValue(
+      customerKey,
+      customer == null ? null : jsonEncode(customer),
+    );
     _customer = customer;
   }
 

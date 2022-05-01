@@ -18,7 +18,7 @@ class CustomerRepository {
   CustomerRepository(this._userStore);
 
   Future<bool> login(String email, String password) async {
-    final loginUserUrl = 'loginUser';
+    final loginUserUrl = 'loginCustomer';
 
     final response = await http.post(
       Uri.parse(_appDef.baseUrl + loginUserUrl),
@@ -37,10 +37,10 @@ class CustomerRepository {
       return false;
     } else {
       final user = Customer.fromJson(body);
-      _userStore.setCustomer(user);
+      await _userStore.setCustomer(user);
       return true;
     }
   }
 
-  Future<void> logout() => _userStore.setCustomer(null);
+  Future<void> logout() async => await _userStore.setCustomer(null);
 }

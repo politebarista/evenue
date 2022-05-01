@@ -17,18 +17,19 @@ class CustomerLoginBloc extends Bloc<CustomerLoginEvent, CustomerLoginState> {
   )   : this._customerRepository = userRepository,
         this._userProfileBloc = userProfileBloc,
         super(CustomerLoginInitialState()) {
-    on<LoginUserEvent>(_loginUserHandler);
+    on<LoginCustomerEvent>(_loginUser);
   }
 
-  void _loginUserHandler(
-    LoginUserEvent event,
+  void _loginUser(
+    LoginCustomerEvent event,
     Emitter<CustomerLoginState> emit,
   ) async {
-    final isCustomerLoggedIn = await _customerRepository.login(
+    emit(CustomerLoginPendingState());
+    final isLoginSuccessful = await _customerRepository.login(
       event.email,
       event.password,
     );
-    if (isCustomerLoggedIn) {
+    if (isLoginSuccessful) {
       _userProfileBloc.add(CheckAuthorizationUserProfileEvent());
     } else {
       emit(CustomerLoginFailureState());

@@ -26,8 +26,8 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
     );
   }
 
-  _logout(LogOutUserProfileEvent _, Emitter<UserProfileState> __) {
-    _customerRepository.logout();
+  _logout(LogOutUserProfileEvent _, Emitter<UserProfileState> __) async {
+    await _customerRepository.logout();
     add(CheckAuthorizationUserProfileEvent());
   }
 }
