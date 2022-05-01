@@ -1,5 +1,5 @@
 import 'package:evenue/common/ui/pending_widget.dart';
-import 'package:evenue/features/login/login_screen.dart';
+import 'package:evenue/features/customer_login/customer_login_screen.dart';
 import 'package:evenue/features/user_profile/user_profile_bloc.dart';
 import 'package:evenue/stores/repositories_store.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +15,12 @@ class UserProfileWidget extends StatelessWidget {
       child: Scaffold(
         body: BlocProvider(
           create: (_) => UserProfileBloc(
-            context.read<RepositoriesStore>().userRepository,
+            context.read<RepositoriesStore>().customerRepository,
           )..add(CheckAuthorizationUserProfileEvent()),
           child: BlocBuilder<UserProfileBloc, UserProfileState>(
             builder: (context, state) {
               if (state is NotAuthorizedUserProfileState) {
-                return LoginScreen();
+                return CustomerLoginScreen();
               } else if (state is PendingUserProfileState) {
                 return PendingWidget();
               } else if (state is AuthorizedUserProfileState) {

@@ -1,9 +1,9 @@
 import 'package:evenue/repositories/cities_repository.dart';
-import 'package:evenue/repositories/user_repository.dart';
+import 'package:evenue/repositories/customer_repository.dart';
 
 class RepositoriesStore {
-  final UserRepository userRepository;
+  final CustomerRepository customerRepository;
   final CitiesRepository citiesRepository;
 
-  RepositoriesStore(this.userRepository, this.citiesRepository);
+  RepositoriesStore(this.customerRepository, this.citiesRepository);
 }

@@ -1,20 +1,20 @@
 import 'package:evenue/common/ui/custom_text_field.dart';
 import 'package:evenue/common/ui/evenue_button.dart';
-import 'package:evenue/features/login/login_bloc.dart';
+import 'package:evenue/features/customer_login/customer_login_bloc.dart';
 import 'package:evenue/features/user_profile/user_profile_bloc.dart';
 import 'package:evenue/stores/repositories_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class CustomerLoginScreen extends StatefulWidget {
+  const CustomerLoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<CustomerLoginScreen> createState() => _CustomerLoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
   late final TextEditingController _emailTextController;
   late final TextEditingController _passwordTextController;
 
@@ -30,14 +30,14 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: BlocProvider(
-        create: (_) => LoginBloc(
-          context.read<RepositoriesStore>().userRepository,
+        create: (_) => CustomerLoginBloc(
+          context.read<RepositoriesStore>().customerRepository,
           context.read<UserProfileBloc>(),
         ),
-        child: BlocConsumer<LoginBloc, LoginState>(
+        child: BlocConsumer<CustomerLoginBloc, CustomerLoginState>(
           buildWhen: (_, current) =>
-              current is LoginPendingState || current is LoginInitialState,
-          listenWhen: (_, current) => current is LoginFailureState,
+              current is CustomerLoginPendingState || current is CustomerLoginInitialState,
+          listenWhen: (_, current) => current is CustomerLoginFailureState,
           builder: (context, state) {
             return Container(
               padding: const EdgeInsets.all(16),
@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   CustomTextField(controller: _passwordTextController),
                   const SizedBox(height: 8),
                   EvenueButton(
-                    onTap: () => context.read<LoginBloc>().add(
+                    onTap: () => context.read<CustomerLoginBloc>().add(
                           LoginUserEvent(
                             _emailTextController.text,
                             _passwordTextController.text,
@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           },
           listener: (context, state) {
-            if (state is LoginFailureState) {
+            if (state is CustomerLoginFailureState) {
               print('failure');
             } else {
               throw UnimplementedError();

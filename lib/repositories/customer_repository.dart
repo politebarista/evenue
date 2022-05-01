@@ -4,18 +4,18 @@ import 'package:evenue/common/config.dart';
 import 'package:evenue/common/definition/app_definition.dart';
 import 'package:evenue/common/password_helper.dart';
 import 'package:evenue/common/status_code.dart';
-import 'package:evenue/models/user.dart';
+import 'package:evenue/models/customer.dart';
 import 'package:evenue/stores/user_store.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UserRepository {
+class CustomerRepository {
   final UserStore _userStore;
   final AppDefinition _appDef = Config.appDef;
 
-  bool get isUserAuthorized => _userStore.user != null;
+  bool get isCustomerAuthorized => _userStore.customer != null;
 
-  UserRepository(this._userStore);
+  CustomerRepository(this._userStore);
 
   Future<bool> login(String email, String password) async {
     final loginUserUrl = 'loginUser';
@@ -31,16 +31,16 @@ class UserRepository {
 
     final body = jsonDecode(response.body);
 
-    if (body == StatusCode.userDontExist ||
+    if (body == StatusCode.customerDontExist ||
         body == StatusCode.incorrectPassword) {
       // TODO maybe I need to put here logging
       return false;
     } else {
-      final user = User.fromJson(body);
-      _userStore.setUser(user);
+      final user = Customer.fromJson(body);
+      _userStore.setCustomer(user);
       return true;
     }
   }
 
-  Future<void> logout() => _userStore.setUser(null);
+  Future<void> logout() => _userStore.setCustomer(null);
 }

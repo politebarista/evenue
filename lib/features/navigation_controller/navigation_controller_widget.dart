@@ -1,5 +1,5 @@
 import 'package:evenue/features/events/events_screen.dart';
-import 'package:evenue/features/login/login_screen.dart';
+import 'package:evenue/features/customer_login/customer_login_screen.dart';
 import 'package:evenue/features/user_profile/user_profile_widget.dart';
 import 'package:evenue/stores/user_store.dart';
 import 'package:flutter/material.dart';

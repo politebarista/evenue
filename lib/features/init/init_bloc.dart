@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:evenue/common/config.dart';
 import 'package:evenue/repositories/cities_repository.dart';
-import 'package:evenue/repositories/user_repository.dart';
+import 'package:evenue/repositories/customer_repository.dart';
 import 'package:evenue/stores/repositories_store.dart';
 import 'package:evenue/stores/user_store.dart';
 import 'package:meta/meta.dart';
@@ -19,7 +19,7 @@ class InitBloc extends Bloc<InitEvent, InitState> {
     final userStore = UserStore();
     await userStore.open();
     final repositoriesStore = RepositoriesStore(
-      UserRepository(userStore),
+      CustomerRepository(userStore),
       CitiesRepository(Config.appDef),
     );
     emit(InitReadyState(userStore, repositoriesStore));

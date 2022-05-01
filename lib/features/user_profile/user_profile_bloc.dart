@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:evenue/repositories/user_repository.dart';
+import 'package:evenue/repositories/customer_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'user_profile_event.dart';
@@ -7,9 +7,9 @@ part 'user_profile_event.dart';
 part 'user_profile_state.dart';
 
 class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
-  final UserRepository _userRepository;
+  final CustomerRepository _customerRepository;
 
-  UserProfileBloc(this._userRepository) : super(PendingUserProfileState()) {
+  UserProfileBloc(this._customerRepository) : super(PendingUserProfileState()) {
     on<CheckAuthorizationUserProfileEvent>(_checkAuthorization);
     on<LogOutUserProfileEvent>(_logout);
   }
@@ -19,14 +19,15 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
     Emitter<UserProfileState> emit,
   ) {
     emit(
-      _userRepository.isUserAuthorized
+      // separate the states of an authorized client and an authorized organizer
+      _customerRepository.isCustomerAuthorized
           ? AuthorizedUserProfileState()
           : NotAuthorizedUserProfileState(),
     );
   }
 
   _logout(LogOutUserProfileEvent _, Emitter<UserProfileState> __) {
-    _userRepository.logout();
+    _customerRepository.logout();
     add(CheckAuthorizationUserProfileEvent());
   }
 }

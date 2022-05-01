@@ -1,35 +1,35 @@
 import 'dart:convert';
 
 import 'package:evenue/features/city_choice/city_choice_user_store.dart';
-import 'package:evenue/models/user.dart';
+import 'package:evenue/models/customer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const userKey = 'user';
+const customerKey = 'customer';
 const selectedCityKey = 'selectedCity';
 
 /// Before using the class, it must be opened using the [open] method
 class UserStore extends CityChoiceUserStore {
   late final SharedPreferences _sharedPrefs;
 
-  User? _user;
+  Customer? _customer;
   String? _selectedCityId;
 
-  User? get user => _user;
+  Customer? get customer => _customer;
 
   String? get selectedCityId => _selectedCityId;
 
   Future<void> open() async {
     _sharedPrefs = await SharedPreferences.getInstance();
 
-    _user = _sharedPrefs.getString(userKey) != null
-        ? jsonDecode(_sharedPrefs.getString(userKey)!)
+    _customer = _sharedPrefs.getString(customerKey) != null
+        ? jsonDecode(_sharedPrefs.getString(customerKey)!)
         : null;
     _selectedCityId = _sharedPrefs.getString(selectedCityKey);
   }
 
-  Future<void> setUser(final User? user) async {
-    await _setPrefsValue(userKey, jsonEncode(user));
-    _user = user;
+  Future<void> setCustomer(final Customer? customer) async {
+    await _setPrefsValue(customerKey, jsonEncode(customer));
+    _customer = customer;
   }
 
   Future<void> setSelectedCityId(final String? selectedCityId) async {
