@@ -5,6 +5,10 @@ abstract class UserProfileState {}
 
 class PendingUserProfileState extends UserProfileState {}
 
-class AuthorizedUserProfileState extends UserProfileState {}
+class AuthorizedUserProfileState extends UserProfileState {
+  final Customer customer;
+
+  AuthorizedUserProfileState(this.customer);
+}
 
 class NotAuthorizedUserProfileState extends UserProfileState {}
