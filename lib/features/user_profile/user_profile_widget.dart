@@ -1,6 +1,6 @@
 import 'package:evenue/common/ui/pending_widget.dart';
-import 'package:evenue/features/customer_login/customer_login_screen.dart';
 import 'package:evenue/features/customer_user_profile/customer_user_profile_widget.dart';
+import 'package:evenue/features/user_authorization/user_authorization_screen.dart';
 import 'package:evenue/features/user_profile/user_profile_bloc.dart';
 import 'package:evenue/stores/repositories_store.dart';
 import 'package:evenue/stores/user_store.dart';
@@ -13,29 +13,31 @@ class UserProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: BlocProvider(
-          create: (_) => UserProfileBloc(
-            context.read<UserStore>(),
-            context.read<RepositoriesStore>().customerRepository,
-          )..add(CheckAuthorizationUserProfileEvent()),
-          child: BlocBuilder<UserProfileBloc, UserProfileState>(
-            builder: (context, state) {
-              if (state is NotAuthorizedUserProfileState) {
-                return CustomerLoginScreen();
-              } else if (state is PendingUserProfileState) {
-                return PendingWidget();
-              } else if (state is AuthorizedUserProfileState) {
-                return CustomerUserProfileWidget(
-                  customer: state.customer,
-                );
-              } else {
-                throw UnimplementedError();
-              }
-            },
-          ),
-        ),
+    return BlocProvider(
+      create: (_) => UserProfileBloc(
+        context.read<UserStore>(),
+        context.read<RepositoriesStore>().customerRepository,
+      )..add(CheckAuthorizationUserProfileEvent()),
+      child: BlocBuilder<UserProfileBloc, UserProfileState>(
+        builder: (context, state) {
+          if (state is NotAuthorizedUserProfileState) {
+            return UserAuthorizationScreen();
+          } else if (state is PendingUserProfileState) {
+            return SafeArea(
+              child: Scaffold(
+                body: Center(
+                  child: PendingWidget(),
+                ),
+              ),
+            );
+          } else if (state is AuthorizedUserProfileState) {
+            return CustomerUserProfileWidget(
+              customer: state.customer,
+            );
+          } else {
+            throw UnimplementedError();
+          }
+        },
       ),
     );
   }

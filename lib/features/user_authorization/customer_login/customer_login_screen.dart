@@ -1,7 +1,8 @@
 import 'package:evenue/common/ui/custom_text_field.dart';
 import 'package:evenue/common/ui/evenue_button.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
-import 'package:evenue/features/customer_login/customer_login_bloc.dart';
+import 'package:evenue/features/user_authorization/customer_login/customer_login_bloc.dart';
+import 'package:evenue/features/user_authorization/user_authorization_bloc.dart';
 import 'package:evenue/features/user_profile/user_profile_bloc.dart';
 import 'package:evenue/stores/repositories_store.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +30,9 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
   // TODO add validation
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocProvider(
+    return Scaffold(
+      appBar: AppBar(title: Text('Авторизация - Клиент')),
+      body: BlocProvider(
         create: (_) => CustomerLoginBloc(
           context.read<RepositoriesStore>().customerRepository,
           context.read<UserProfileBloc>(),
@@ -54,8 +56,6 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
-                    Text('authorization'),
-                    const SizedBox(height: 8),
                     CustomTextField(controller: _emailTextController),
                     const SizedBox(height: 8),
                     CustomTextField(controller: _passwordTextController),
@@ -67,7 +67,15 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                               _passwordTextController.text,
                             ),
                           ),
-                      text: 'Login',
+                      text: 'Войти',
+                    ),
+                    const SizedBox(height: 8),
+                    TextButton(
+                      onPressed: () =>
+                          context.read<UserAuthorizationBloc>().add(
+                                ChangeUserAuthorizationMethodEvent(false),
+                              ),
+                      child: Text('Я организатор'),
                     ),
                   ],
                 ),
@@ -78,7 +86,7 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
           },
           listener: (context, state) {
             if (state is CustomerLoginFailureState) {
-              print('failure');
+              print('failure while login customer'); // TODO: add handling
             } else {
               throw UnimplementedError();
             }
