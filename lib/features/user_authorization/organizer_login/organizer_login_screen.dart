@@ -2,6 +2,8 @@ import 'package:evenue/common/ui/custom_text_field.dart';
 import 'package:evenue/common/ui/evenue_button.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
 import 'package:evenue/features/user_authorization/organizer_login/organizer_login_bloc.dart';
+import 'package:evenue/features/user_profile/user_profile_bloc.dart';
+import 'package:evenue/stores/repositories_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,7 +32,10 @@ class _OrganizerLoginScreenState extends State<OrganizerLoginScreen> {
     return Scaffold(
       appBar: AppBar(title: Text('Авторизация - Организатор')),
       body: BlocProvider<OrganizerLoginBloc>(
-        create: (_) => OrganizerLoginBloc(),
+        create: (_) => OrganizerLoginBloc(
+          context.read<RepositoriesStore>().organizerRepository,
+          context.read<UserProfileBloc>(),
+        ),
         child: BlocConsumer<OrganizerLoginBloc, OrganizerLoginState>(
           buildWhen: (_, current) =>
               current is OrganizerLoginPendingState ||

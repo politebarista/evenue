@@ -1,18 +1,14 @@
+import 'package:evenue/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'customer.g.dart';
 
 @JsonSerializable()
-class Customer {
-  @JsonKey(name: 'Id')
+class Customer extends User {
   final String id;
-  @JsonKey(name: 'LastName')
   final String lastName;
-  @JsonKey(name: 'FirstName')
   final String firstName;
-  @JsonKey(name: 'Email')
   final String email;
-  @JsonKey(name: 'PhoneNumber')
   final String phoneNumber;
 
   Customer(

@@ -2,42 +2,58 @@ import 'dart:convert';
 
 import 'package:evenue/features/city_choice/city_choice_user_store.dart';
 import 'package:evenue/models/customer.dart';
+import 'package:evenue/models/organizer.dart';
+import 'package:evenue/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const customerKey = 'customer';
+const organizerKey = 'organizer';
 const selectedCityKey = 'selectedCity';
 
 /// Before using the class, it must be opened using the [open] method
 class UserStore extends CityChoiceUserStore {
   late final SharedPreferences _sharedPrefs;
 
-  Customer? _customer;
   String? _selectedCityId;
-
-  Customer? get customer => _customer;
+  Customer? _customer;
+  Organizer? _organizer;
 
   String? get selectedCityId => _selectedCityId;
+  User? get user => _customer ?? _organizer;
+
+  bool get isUserAuthorized => user != null;
 
   Future<void> open() async {
     _sharedPrefs = await SharedPreferences.getInstance();
 
+    _selectedCityId = _sharedPrefs.getString(selectedCityKey);
     _customer = _sharedPrefs.getString(customerKey) != null
         ? Customer.fromJson(jsonDecode(_sharedPrefs.getString(customerKey)!))
         : null;
-    _selectedCityId = _sharedPrefs.getString(selectedCityKey);
-  }
-
-  Future<void> setCustomer(final Customer? customer) async {
-    await _setPrefsValue(
-      customerKey,
-      customer == null ? null : jsonEncode(customer),
-    );
-    _customer = customer;
+    _organizer = _sharedPrefs.getString(organizerKey) != null
+        ? Organizer.fromJson(jsonDecode(_sharedPrefs.getString(organizerKey)!))
+        : null;
   }
 
   Future<void> setSelectedCityId(final String? selectedCityId) async {
     await _setPrefsValue(selectedCityKey, selectedCityId);
     _selectedCityId = selectedCityId;
+  }
+
+  Future<void> setCustomer(final Customer? customer) async {
+    await _setPrefsValue(
+      customerKey,
+      customer == null ? null : jsonEncode(customer.toJson()),
+    );
+    _customer = customer;
+  }
+
+  Future<void> setOrganizer(final Organizer? organizer) async {
+    await _setPrefsValue(
+      organizerKey,
+      organizer == null ? null : jsonEncode(organizer.toJson()),
+    );
+    _organizer = organizer;
   }
 
   Future<void> _setPrefsValue(

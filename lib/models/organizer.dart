@@ -1,9 +1,10 @@
+import 'package:evenue/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'organizer.g.dart';
 
 @JsonSerializable()
-class Organizer {
+class Organizer extends User {
   final String id;
   final String name;
   final String description;
@@ -25,4 +26,6 @@ class Organizer {
   factory Organizer.fromJson(Map<String, dynamic> json) => _$OrganizerFromJson(
         json,
       );
+
+  Map<String, dynamic> toJson() => _$OrganizerToJson(this);
 }

@@ -1,5 +1,6 @@
 import 'package:evenue/common/ui/pending_widget.dart';
 import 'package:evenue/features/customer_user_profile/customer_user_profile_widget.dart';
+import 'package:evenue/features/organizer_user_profile/organizer_user_profile_widget.dart';
 import 'package:evenue/features/user_authorization/user_authorization_screen.dart';
 import 'package:evenue/features/user_profile/user_profile_bloc.dart';
 import 'package:evenue/stores/repositories_store.dart';
@@ -17,6 +18,7 @@ class UserProfileWidget extends StatelessWidget {
       create: (_) => UserProfileBloc(
         context.read<UserStore>(),
         context.read<RepositoriesStore>().customerRepository,
+        context.read<RepositoriesStore>().organizerRepository,
       )..add(CheckAuthorizationUserProfileEvent()),
       child: BlocBuilder<UserProfileBloc, UserProfileState>(
         builder: (context, state) {
@@ -30,10 +32,10 @@ class UserProfileWidget extends StatelessWidget {
                 ),
               ),
             );
-          } else if (state is AuthorizedUserProfileState) {
-            return CustomerUserProfileWidget(
-              customer: state.customer,
-            );
+          } else if (state is AuthorizedCustomerProfileState) {
+            return CustomerUserProfileWidget(customer: state.customer);
+          } else if (state is AuthorizedOrganizerProfileState) {
+            return OrganizerUserProfileWidget(organizer: state.organizer);
           } else {
             throw UnimplementedError();
           }
