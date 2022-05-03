@@ -18,7 +18,23 @@ class OrganizerUserProfileWidget extends StatelessWidget {
       body: Column(
         children: [
           Text('Название - ${organizer.name}'),
-          // TODO: add some others displaying params about organizer
+          Text('Описание - ${organizer.description}'),
+          Text('E-mail контактного лица - ${organizer.contactPersonEmail}'),
+          Text('Имя контактного лица - ${organizer.contactPersonName}'),
+          Text(
+            'Номер телефона контактного лица - ${organizer.contactPersonPhone}',
+          ),
+          Text('ИНН - ${organizer.inn}'),
+          MaterialButton(
+            // TODO: add create event feature
+            onPressed: () => print('pressed add event button'),
+            child: Text('Создать мероприятие'),
+          ),
+          MaterialButton(
+            // TODO: add show all events feature
+            onPressed: () => print('pressed show events button'),
+            child: Text('Показать все мероприятия организатора'),
+          ),
           MaterialButton(
             onPressed: () => context.read<UserProfileBloc>().add(
                   LogOutUserProfileEvent(),
