@@ -19,6 +19,9 @@ class InitScreen extends StatelessWidget {
           if (state is InitNotReadyState) {
             return Text('init'); // TODO replace with splash
           } else if (state is InitReadyState) {
+            /// TODO : It seems that this data (Stores & Repositories) needs to
+            /// be received and packaged into the Provider even before the
+            /// launch of MaterialApp so as not to create an extra Navigator
             return MultiProvider(
               providers: [
                 Provider<UserStore>(create: (_) => state.userStore),

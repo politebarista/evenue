@@ -1,6 +1,7 @@
 import 'package:evenue/common/ui/custom_text_field.dart';
 import 'package:evenue/common/ui/evenue_button.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
+import 'package:evenue/features/customer_registration/customer_registration_widget.dart';
 import 'package:evenue/features/user_authorization/customer_login/customer_login_bloc.dart';
 import 'package:evenue/features/user_authorization/user_authorization_bloc.dart';
 import 'package:evenue/features/user_profile/user_profile_bloc.dart';
@@ -52,32 +53,43 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                 );
               });
             } else if (state is CustomerLoginInitialState) {
-              return Container(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    CustomTextField(controller: _emailTextController),
-                    const SizedBox(height: 8),
-                    CustomTextField(controller: _passwordTextController),
-                    const SizedBox(height: 8),
-                    EvenueButton(
-                      onTap: () => context.read<CustomerLoginBloc>().add(
-                            LoginCustomerEvent(
-                              _emailTextController.text,
-                              _passwordTextController.text,
-                            ),
-                          ),
-                      text: 'Войти',
-                    ),
-                    const SizedBox(height: 8),
-                    TextButton(
-                      onPressed: () =>
-                          context.read<UserAuthorizationBloc>().add(
-                                ChangeUserAuthorizationMethodEvent(false),
+              return SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      CustomTextField(controller: _emailTextController),
+                      const SizedBox(height: 8),
+                      CustomTextField(controller: _passwordTextController),
+                      const SizedBox(height: 8),
+                      EvenueButton(
+                        onTap: () => context.read<CustomerLoginBloc>().add(
+                              LoginCustomerEvent(
+                                _emailTextController.text,
+                                _passwordTextController.text,
                               ),
-                      child: Text('Я организатор'),
-                    ),
-                  ],
+                            ),
+                        text: 'Войти',
+                      ),
+                      const SizedBox(height: 8),
+                      TextButton(
+                        onPressed: () =>
+                            context.read<UserAuthorizationBloc>().add(
+                                  ChangeUserAuthorizationMethodEvent(false),
+                                ),
+                        child: Text('Я организатор'),
+                      ),
+                      const SizedBox(height: 8),
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => CustomerRegistrationWidget(),
+                          ),
+                        ),
+                        child: Text('Зарегистрироваться'),
+                      ),
+                    ],
+                  ),
                 ),
               );
             } else {
