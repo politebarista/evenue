@@ -60,8 +60,10 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                     children: [
                       CustomTextField(controller: _emailTextController),
                       const SizedBox(height: 8),
+                      // TODO: hide password with dots
                       CustomTextField(controller: _passwordTextController),
                       const SizedBox(height: 8),
+                      // TODO: add validation before sending
                       EvenueButton(
                         onTap: () => context.read<CustomerLoginBloc>().add(
                               LoginCustomerEvent(
@@ -81,7 +83,7 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                       ),
                       const SizedBox(height: 8),
                       TextButton(
-                        onPressed: () => Navigator.of(context).pushReplacement(
+                        onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => CustomerRegistrationWidget(),
                           ),

@@ -4,17 +4,25 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
+  final String? label;
 
-  const CustomTextField({required this.controller, Key? key}) : super(key: key);
+  const CustomTextField({
+    required this.controller,
+    this.label,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final preparedLabel = label == null ? null : Text(label!);
+
     return TextFormField(
       controller: controller,
       style: TextStyle(
         color: Colors.black,
       ),
       decoration: InputDecoration(
+        label: preparedLabel,
         border: OutlineInputBorder(
           borderSide: BorderSide(
             color: CustomColorScheme.secondaryColor,
