@@ -124,7 +124,7 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
     }
 
     if (!PasswordHelper.isPasswordValid(_passwordTextController.text)) {
-      _showDialog(context, 'Пароль введен неверно');
+      _showDialog(context, 'Пароль должен содержать не менее 5 символов');
       return;
     }
 

@@ -1,3 +1,6 @@
+import 'package:evenue/common/email_helper.dart';
+import 'package:evenue/common/password_helper.dart';
+import 'package:evenue/common/phone_number_helper.dart';
 import 'package:evenue/common/ui/custom_text_field.dart';
 import 'package:evenue/common/ui/evenue_button.dart';
 import 'package:evenue/common/ui/indent_widget.dart';
@@ -8,6 +11,7 @@ import 'package:evenue/features/user_profile/user_profile_widget.dart';
 import 'package:evenue/stores/repositories_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
 
 class CustomerRegistrationWidget extends StatefulWidget {
   const CustomerRegistrationWidget({Key? key}) : super(key: key);
@@ -88,16 +92,7 @@ class _CustomerRegistrationWidgetState
                       const SizedBox(height: 8),
                       // TODO: add validation before sending
                       EvenueButton(
-                        onTap: () =>
-                            context.read<CustomerRegistrationBloc>().add(
-                                  CustomerRegistrationEvent(
-                                    _lastNameTextController.text,
-                                    _firstNameTextController.text,
-                                    _emailTextController.text,
-                                    _phoneNumberTextController.text,
-                                    _passwordTextController.text,
-                                  ),
-                                ),
+                        onTap: () => _register(context),
                         text: 'Зарегистрироваться',
                       ),
                       const SizedBox(height: 8),
@@ -134,4 +129,72 @@ class _CustomerRegistrationWidgetState
       ),
     );
   }
+
+  void _register(BuildContext context) {
+    if (_lastNameTextController.text.trim().isEmpty) {
+      _showDialog(context, 'Поле фамилии должно быть заполнено');
+      return;
+    }
+
+    if (_firstNameTextController.text.trim().isEmpty) {
+      _showDialog(context, 'Поле имени должно быть заполнено');
+      return;
+    }
+
+    if (!EmailHelper.isEmailValid(_emailTextController.text)) {
+      _showDialog(context, 'Email введен неверно');
+      return;
+    }
+
+    if (!PhoneNumberHelper.isPhoneNumberValid(
+      _phoneNumberTextController.text,
+    )) {
+      _showDialog(context, 'Номер телефона введен неверно');
+      return;
+    }
+
+    if (!PasswordHelper.isPasswordValid(_passwordTextController.text)) {
+      _showDialog(context, 'Пароль должен содержать не менее 5 символов');
+      return;
+    }
+
+    context.read<CustomerRegistrationBloc>().add(
+          CustomerRegistrationEvent(
+            _lastNameTextController.text,
+            _firstNameTextController.text,
+            _emailTextController.text,
+            _phoneNumberTextController.text,
+            _passwordTextController.text,
+          ),
+        );
+  }
+
+  void _showDialog(
+    final BuildContext context,
+    final String title, [
+    final String? content,
+  ]) =>
+      showPlatformDialog(
+        context: context,
+        builder: (_) => BasicDialogAlert(
+          title: Text(
+            title,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          content: content == null
+              ? null
+              : Text(
+                  content,
+                  style: TextStyle(color: Colors.black),
+                ),
+          actions: [
+            BasicDialogAction(
+              title: Text("Ок"),
+              onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+            ),
+          ],
+        ),
+      );
 }
