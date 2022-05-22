@@ -36,6 +36,7 @@ class OrganizerLoginBloc
       _userProfileBloc.add(CheckAuthorizationUserProfileEvent());
     } else {
       emit(OrganizerLoginFailureState());
+      emit(OrganizerLoginInitialState());
     }
   }
 }

@@ -38,7 +38,7 @@ class _CustomerRegistrationWidgetState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Регистрация')),
+      appBar: AppBar(title: Text('Регистрация - клиент')),
       body: BlocProvider<CustomerRegistrationBloc>(
         create: (context) => CustomerRegistrationBloc(
           context.read<RepositoriesStore>().customerRepository,

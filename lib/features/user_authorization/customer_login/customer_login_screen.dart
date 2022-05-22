@@ -1,3 +1,5 @@
+import 'package:evenue/common/email_helper.dart';
+import 'package:evenue/common/password_helper.dart';
 import 'package:evenue/common/ui/custom_text_field.dart';
 import 'package:evenue/common/ui/evenue_button.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
@@ -8,6 +10,7 @@ import 'package:evenue/features/user_profile/user_profile_bloc.dart';
 import 'package:evenue/stores/repositories_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:provider/provider.dart';
 
 class CustomerLoginScreen extends StatefulWidget {
@@ -58,19 +61,19 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
-                      CustomTextField(controller: _emailTextController),
+                      CustomTextField(
+                        controller: _emailTextController,
+                        label: 'Email',
+                      ),
                       const SizedBox(height: 8),
                       // TODO: hide password with dots
-                      CustomTextField(controller: _passwordTextController),
+                      CustomTextField(
+                        controller: _passwordTextController,
+                        label: 'Пароль',
+                      ),
                       const SizedBox(height: 8),
-                      // TODO: add validation before sending
                       EvenueButton(
-                        onTap: () => context.read<CustomerLoginBloc>().add(
-                              LoginCustomerEvent(
-                                _emailTextController.text,
-                                _passwordTextController.text,
-                              ),
-                            ),
+                        onTap: () => _login(context),
                         text: 'Войти',
                       ),
                       const SizedBox(height: 8),
@@ -100,7 +103,11 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
           },
           listener: (context, state) {
             if (state is CustomerLoginFailureState) {
-              print('failure while login customer'); // TODO: add handling
+              _showDialog(
+                context,
+                'Ошибка при авторизации пользователя',
+                'Возможно этот пользователь не зарегистрирован',
+              );
             } else {
               throw UnimplementedError();
             }
@@ -109,4 +116,52 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
       ),
     );
   }
+
+  void _login(final BuildContext context) {
+    if (!EmailHelper.isEmailValid(_emailTextController.text)) {
+      _showDialog(context, 'Email введен неверно');
+      return;
+    }
+
+    if (!PasswordHelper.isPasswordValid(_passwordTextController.text)) {
+      _showDialog(context, 'Пароль введен неверно');
+      return;
+    }
+
+    context.read<CustomerLoginBloc>().add(
+          LoginCustomerEvent(
+            _emailTextController.text,
+            _passwordTextController.text,
+          ),
+        );
+  }
+
+  void _showDialog(
+    final BuildContext context,
+    final String title, [
+    final String? content,
+  ]) =>
+      showPlatformDialog(
+        context: context,
+        builder: (_) => BasicDialogAlert(
+          title: Text(
+            title,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          content: content == null
+              ? null
+              : Text(
+                  content,
+                  style: TextStyle(color: Colors.black),
+                ),
+          actions: [
+            BasicDialogAction(
+              title: Text("Ок"),
+              onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+            ),
+          ],
+        ),
+      );
 }

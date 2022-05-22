@@ -1,3 +1,5 @@
+import 'package:evenue/common/email_helper.dart';
+import 'package:evenue/common/password_helper.dart';
 import 'package:evenue/common/ui/custom_text_field.dart';
 import 'package:evenue/common/ui/evenue_button.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
@@ -6,6 +8,7 @@ import 'package:evenue/features/user_profile/user_profile_bloc.dart';
 import 'package:evenue/stores/repositories_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
 
 import '../user_authorization_bloc.dart';
 
@@ -57,17 +60,16 @@ class _OrganizerLoginScreenState extends State<OrganizerLoginScreen> {
                   children: [
                     CustomTextField(
                       controller: _contactPersonEmailTextController,
+                      label: 'Email контактного лица',
                     ),
                     const SizedBox(height: 8),
-                    CustomTextField(controller: _passwordTextController),
+                    CustomTextField(
+                      controller: _passwordTextController,
+                      label: 'Пароль',
+                    ),
                     const SizedBox(height: 8),
                     EvenueButton(
-                      onTap: () => context.read<OrganizerLoginBloc>().add(
-                            LoginOrganizerEvent(
-                              _contactPersonEmailTextController.text,
-                              _passwordTextController.text,
-                            ),
-                          ),
+                      onTap: () => _login(context),
                       text: 'Войти',
                     ),
                     const SizedBox(height: 8),
@@ -86,8 +88,12 @@ class _OrganizerLoginScreenState extends State<OrganizerLoginScreen> {
             }
           },
           listener: (context, state) {
-            if (state is OrganizerLoginInitialState) {
-              print('failure while login organizer'); // TODO: add handling
+            if (state is OrganizerLoginFailureState) {
+              _showDialog(
+                context,
+                'Ошибка при авторизации организатора',
+                'Возможно этот организатор не зарегистрирован',
+              );
             } else {
               throw UnimplementedError();
             }
@@ -96,4 +102,52 @@ class _OrganizerLoginScreenState extends State<OrganizerLoginScreen> {
       ),
     );
   }
+
+  void _login(final BuildContext context) {
+    if (!EmailHelper.isEmailValid(_contactPersonEmailTextController.text)) {
+      _showDialog(context, 'Email введен неверно');
+      return;
+    }
+
+    if (!PasswordHelper.isPasswordValid(_passwordTextController.text)) {
+      _showDialog(context, 'Пароль введен неверно');
+      return;
+    }
+
+    context.read<OrganizerLoginBloc>().add(
+          LoginOrganizerEvent(
+            _contactPersonEmailTextController.text,
+            _passwordTextController.text,
+          ),
+        );
+  }
+
+  void _showDialog(
+    final BuildContext context,
+    final String title, [
+    final String? content,
+  ]) =>
+      showPlatformDialog(
+        context: context,
+        builder: (_) => BasicDialogAlert(
+          title: Text(
+            title,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          content: content == null
+              ? null
+              : Text(
+                  content,
+                  style: TextStyle(color: Colors.black),
+                ),
+          actions: [
+            BasicDialogAction(
+              title: Text("Ок"),
+              onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+            ),
+          ],
+        ),
+      );
 }

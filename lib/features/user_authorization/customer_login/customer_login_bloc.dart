@@ -35,6 +35,7 @@ class CustomerLoginBloc extends Bloc<CustomerLoginEvent, CustomerLoginState> {
       _userProfileBloc.add(CheckAuthorizationUserProfileEvent());
     } else {
       emit(CustomerLoginFailureState());
+      emit(CustomerLoginInitialState());
     }
   }
 }
