@@ -3,7 +3,6 @@ import 'package:evenue/features/city_choice/city_choice_user_store.dart';
 import 'package:evenue/repositories/cities_repository.dart';
 import 'package:evenue/models/city.dart';
 import 'package:meta/meta.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'city_choice_event.dart';
 

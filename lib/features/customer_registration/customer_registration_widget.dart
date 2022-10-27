@@ -86,6 +86,7 @@ class _CustomerRegistrationWidgetState
                       const SizedBox(height: 8),
                       // TODO: hide password with dots
                       CustomTextField(
+                        obscureText: true,
                         controller: _passwordTextController,
                         label: 'Пароль',
                       ),
@@ -119,8 +120,27 @@ class _CustomerRegistrationWidgetState
                   );
               Navigator.of(context).pop();
             } else if (state is CustomerRegistrationFailureState) {
-              // todo: add failure register dialog
-              print('registration failure');
+              showPlatformDialog<void>(
+                context: context,
+                builder: (_) => BasicDialogAlert(
+                  title: Text(
+                    'Ошибка при регистрации клиента',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  content: Text(
+                    'Возможно, клиент с таким электронным адресом уже зарегистрирован',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  actions: [
+                    BasicDialogAction(
+                      title: Text("Ок"),
+                      onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                    ),
+                  ],
+                ),
+              );
             } else {
               throw UnimplementedError();
             }

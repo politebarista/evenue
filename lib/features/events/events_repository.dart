@@ -5,10 +5,10 @@ import 'package:evenue/models/event.dart';
 import 'package:http/http.dart' as http;
 
 // TODO: Reform the api into a repository
-class EventsApi {
+class EventsRepository {
   final AppDefinition _appDef;
 
-  EventsApi(this._appDef);
+  EventsRepository(this._appDef);
 
   Future<List<Event>> getEvents({String? cityId}) async {
     final getEventsUrl = 'getEvents';

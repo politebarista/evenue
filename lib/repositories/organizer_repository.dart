@@ -4,16 +4,14 @@ import 'package:evenue/common/config.dart';
 import 'package:evenue/common/definition/app_definition.dart';
 import 'package:evenue/common/password_helper.dart';
 import 'package:evenue/common/evenue_status_code.dart';
-import 'package:evenue/models/customer.dart';
 import 'package:evenue/models/organizer.dart';
 import 'package:evenue/stores/user_store.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class OrganizerRepository {
   final UserStore _userStore;
-  final AppDefinition _appDef = Config.appDef; /// TODO I think it should be a
-  /// parameter passed to the repository
+  /// TODO I think it should be a parameter passed to the repository
+  final AppDefinition _appDef = Config.appDef;
 
   OrganizerRepository(this._userStore);
 
@@ -33,7 +31,6 @@ class OrganizerRepository {
 
     if (body == EvenueStatusCode.organizerDontExist ||
         body == EvenueStatusCode.incorrectPassword) {
-      // TODO maybe I need to put here logging
       return false;
     } else {
       final organizer = Organizer.fromJson(body);

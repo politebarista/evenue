@@ -24,21 +24,24 @@ class CustomerUserProfileWidget extends StatelessWidget {
             Text('Фамилия: ${customer.lastName}'),
             Text('Номер телефона: ${customer.phoneNumber}'),
             Text('E-mail: ${customer.email}'),
-            MaterialButton(
-              // TODO: add purchase history
-              onPressed: () => print('pressed purchase history button'),
-              child: Text('История покупок'),
-            ),
-            MaterialButton(
-              // TODO: add change data feature
-              onPressed: () => print('pressed change data button'),
-              child: Text('Изменить данные'),
-            ),
-            MaterialButton(
-              onPressed: () => context.read<UserProfileBloc>().add(
-                LogOutUserProfileEvent(),
+            // MaterialButton(
+            //   // TODO: add purchase history
+            //   onPressed: () => print('pressed purchase history button'),
+            //   child: Text('История покупок'),
+            // ),
+            // MaterialButton(
+            //   // TODO: add change data feature
+            //   onPressed: () => print('pressed change data button'),
+            //   child: Text('Изменить данные'),
+            // ),
+            const SizedBox(height: 60),
+            Center(
+              child: MaterialButton(
+                onPressed: () => context.read<UserProfileBloc>().add(
+                      LogOutUserProfileEvent(),
+                    ),
+                child: Text('Выйти'),
               ),
-              child: Text('Выйти'),
             ),
           ],
         ),

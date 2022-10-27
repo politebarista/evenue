@@ -1,5 +1,4 @@
 import 'package:evenue/common/ui/custom_color_scheme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextTheme {

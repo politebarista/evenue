@@ -7,14 +7,11 @@ import 'package:evenue/common/evenue_status_code.dart';
 import 'package:evenue/models/customer.dart';
 import 'package:evenue/stores/user_store.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerRepository {
   final UserStore _userStore;
+  /// TODO I think it should be a parameter passed to the repository
   final AppDefinition _appDef = Config.appDef;
-
-  /// TODO I think it should be a
-  /// parameter passed to the repository
 
   CustomerRepository(this._userStore);
 

@@ -11,7 +11,6 @@ import 'package:evenue/stores/repositories_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
-import 'package:provider/provider.dart';
 
 class CustomerLoginScreen extends StatefulWidget {
   const CustomerLoginScreen({Key? key}) : super(key: key);
@@ -68,6 +67,7 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                       const SizedBox(height: 8),
                       // TODO: hide password with dots
                       CustomTextField(
+                        obscureText: true,
                         controller: _passwordTextController,
                         label: 'Пароль',
                       ),
@@ -105,8 +105,8 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
             if (state is CustomerLoginFailureState) {
               _showDialog(
                 context,
-                'Ошибка при авторизации пользователя',
-                'Возможно этот пользователь не зарегистрирован',
+                'Ошибка при авторизации клиента',
+                'Возможно этот клиента не зарегистрирован',
               );
             } else {
               throw UnimplementedError();
