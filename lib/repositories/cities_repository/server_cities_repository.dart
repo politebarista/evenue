@@ -4,10 +4,12 @@ import 'package:evenue/common/definition/app_definition.dart';
 import 'package:evenue/models/city.dart';
 import 'package:http/http.dart' as http;
 
-class CitiesRepository {
+import 'cities_repository.dart';
+
+class ServerCitiesRepository implements CitiesRepository {
   final AppDefinition _appDef;
 
-  CitiesRepository(this._appDef);
+  ServerCitiesRepository(this._appDef);
 
   Future<List<City>> getCities() async {
     final getCities = 'getCities';

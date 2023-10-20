@@ -13,6 +13,8 @@ class InitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: the functionality can be implemented without the use of a BLoC,
+    //  which complicates understanding in this case
     return BlocProvider<InitBloc>(
       create: (_) => InitBloc(
         context.read<Config>(),

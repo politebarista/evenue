@@ -6,10 +6,12 @@ import 'package:evenue/models/organizer.dart';
 import 'package:evenue/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// TODO: make keys private
 const customerKey = 'customer';
 const organizerKey = 'organizer';
 const selectedCityKey = 'selectedCity';
 
+/// TODO: close constructor and use [open] converted to factory method
 /// Before using the class, it must be opened using the [open] method
 class UserStore extends CityChoiceUserStore {
   late final SharedPreferences _sharedPrefs;
