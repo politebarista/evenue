@@ -1,3 +1,3 @@
-abstract class AppDefinition {
-  abstract final String baseUrl;
+abstract interface class AppDefinition {
+  String get baseUrl;
 }

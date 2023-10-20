@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:evenue/common/config.dart';
 import 'package:evenue/common/definition/app_definition.dart';
 import 'package:evenue/common/password_helper.dart';
 import 'package:evenue/common/evenue_status_code.dart';
@@ -10,10 +9,9 @@ import 'package:http/http.dart' as http;
 
 class CustomerRepository {
   final UserStore _userStore;
-  /// TODO I think it should be a parameter passed to the repository
-  final AppDefinition _appDef = Config.appDef;
+  final AppDefinition _appDef;
 
-  CustomerRepository(this._userStore);
+  CustomerRepository(this._userStore, this._appDef);
 
   /// TODO: Maybe I should return status code cause user need to know whats
   /// error is appear

@@ -1,3 +1,4 @@
+import 'package:evenue/common/config.dart';
 import 'package:evenue/features/city_choice/city_choice_screen.dart';
 import 'package:evenue/features/init/init_bloc.dart';
 import 'package:evenue/features/navigation_controller/navigation_controller_widget.dart';
@@ -13,7 +14,9 @@ class InitScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<InitBloc>(
-      create: (_) => InitBloc()..add(InitEvent()),
+      create: (_) => InitBloc(
+        context.read<Config>(),
+      )..add(InitEvent()),
       child: BlocBuilder<InitBloc, InitState>(
         builder: (context, state) {
           if (state is InitNotReadyState) {

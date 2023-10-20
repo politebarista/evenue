@@ -3,11 +3,11 @@ import 'package:evenue/common/definition/debug_app_definition.dart';
 import 'package:evenue/common/flavor.dart';
 
 class Config {
-  static late final Flavor flavor;
+  final Flavor flavor;
 
-  static AppDefinition? _currentAppDef;
+  AppDefinition? _currentAppDef;
 
-  static AppDefinition get appDef {
+  AppDefinition get appDef {
     late final currentAppDef;
 
     if (_currentAppDef == null) {
@@ -26,4 +26,6 @@ class Config {
 
     return currentAppDef;
   }
+
+  Config(final Flavor flavor) : this.flavor = flavor;
 }

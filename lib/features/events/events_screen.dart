@@ -1,3 +1,4 @@
+import 'package:evenue/common/config.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
 import 'package:evenue/features/city_choice/city_choice_screen.dart';
 import 'package:evenue/features/events/events_bloc.dart';
@@ -30,7 +31,9 @@ class EventsScreen extends StatelessWidget {
         ],
       ),
       body: BlocProvider(
-        create: (context) => EventsBloc()..add(GetEventsEvent(cityId)),
+        create: (context) => EventsBloc(
+          context.read<Config>(),
+        )..add(GetEventsEvent(cityId)),
         child: Scaffold(
           body: BlocBuilder<EventsBloc, EventsState>(
             builder: (context, state) {

@@ -13,8 +13,8 @@ part 'events_state.dart';
 class EventsBloc extends Bloc<EventsEvent, EventsState> {
   final EventsRepository _api;
 
-  EventsBloc()
-      : _api = EventsRepository(Config.appDef),
+  EventsBloc(Config config)
+      : _api = EventsRepository(config.appDef),
         super(EventsPendingState()) {
     on<GetEventsEvent>(_getEvents);
     on<SortEventsEvent>(_sortEvents);

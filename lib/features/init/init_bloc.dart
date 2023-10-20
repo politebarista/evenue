@@ -12,7 +12,12 @@ part 'init_event.dart';
 part 'init_state.dart';
 
 class InitBloc extends Bloc<InitEvent, InitState> {
-  InitBloc() : super(InitNotReadyState()) {
+  final Config _config;
+
+  InitBloc(
+    Config config,
+  )   : _config = config,
+        super(InitNotReadyState()) {
     on<InitEvent>(_init);
   }
 
@@ -21,9 +26,9 @@ class InitBloc extends Bloc<InitEvent, InitState> {
     await userStore.open();
 
     final repositoriesStore = RepositoriesStore(
-      CustomerRepository(userStore),
-      OrganizerRepository(userStore),
-      CitiesRepository(Config.appDef),
+      CustomerRepository(userStore, _config.appDef),
+      OrganizerRepository(userStore, _config.appDef),
+      CitiesRepository(_config.appDef),
     );
 
     emit(InitReadyState(userStore, repositoriesStore));
