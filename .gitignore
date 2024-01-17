@@ -97,3 +97,9 @@ settings_files
 *.inject.dart
 *.g.dart
 ios/Flutter/flutter_export_environment.sh
+
+# Firebase
+lib/firebase_options.dart
+ios/firebase_app_id_file.json
+ios/Runner/GoogleService-Info.plist
+android/app/google-services.json
