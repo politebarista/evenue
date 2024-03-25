@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:evenue/common/constants.dart';
 import 'package:evenue/common/event_date_helper.dart';
 import 'package:evenue/common/price_formatter.dart';
 import 'package:evenue/common/ui/common_ui_provider.dart';
@@ -34,24 +35,26 @@ class EventDetailsWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                commonUiProvider.paddings.v8,
+                SizedBox(height: 8),
                 Text(
                   event.name,
                   style: customTextStyles.title,
                 ),
-                commonUiProvider.paddings.v8,
+                SizedBox(height: 8),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(defaultBorderRadius - 1),
-                  child: Image(
+                  child: CachedNetworkImage(
+                    imageUrl: event.imageUrl,
                     fit: BoxFit.cover,
-                    image: CachedNetworkImageProvider(
-                      event.imageUrl,
+                    errorWidget: (_, __, ___) => Image.asset(
+                      noImagePlaceholderPath,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
-                commonUiProvider.paddings.v8,
+                SizedBox(height: 8),
                 commonUiProvider.divider,
-                commonUiProvider.paddings.v8,
+                SizedBox(height: 8),
                 Text(
                   event.description,
                   style: customTextStyles.description,
@@ -75,7 +78,7 @@ class EventDetailsWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                commonUiProvider.paddings.v8,
+                SizedBox(height: 8),
                 Row(
                   children: [
                     Icon(
@@ -91,7 +94,7 @@ class EventDetailsWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                commonUiProvider.paddings.v8,
+                SizedBox(height: 8),
               ],
             ),
           ),

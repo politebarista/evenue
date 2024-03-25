@@ -23,6 +23,7 @@ class CustomTextStyles {
   TextStyle get cardDescription => TextStyle(
     color: Colors.black45,
     fontSize: 15,
+    height: 1,
   );
 
   TextStyle get price => TextStyle(

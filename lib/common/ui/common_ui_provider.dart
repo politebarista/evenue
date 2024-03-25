@@ -12,6 +12,7 @@ class CommonUiProvider {
     ),
   ];
 
+  @deprecated
   final CustomPaddings paddings = CustomPaddings();
 
   final divider = Divider(thickness: 1);

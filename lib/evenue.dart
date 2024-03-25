@@ -10,15 +10,17 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-void runner(Config config) async {
-  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
+void runner(Config config) {
   runZonedGuarded(
-    () => runApp(Evenue(config)),
+    () async {
+      final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+
+      runApp(Evenue(config));
+    },
     (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack),
   );
 }

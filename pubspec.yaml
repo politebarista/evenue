@@ -17,7 +17,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cached_network_image: 3.2.0
+  cached_network_image: 3.3.1
   cupertino_icons: ^1.0.2
   equatable: 2.0.0
   firebase_core: 2.24.2
@@ -43,3 +43,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/

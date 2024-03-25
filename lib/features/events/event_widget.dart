@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:evenue/common/constants.dart';
 import 'package:evenue/common/price_formatter.dart';
 import 'package:evenue/common/ui/common_ui_provider.dart';
 import 'package:evenue/common/ui/constants.dart';
@@ -92,12 +93,14 @@ class EventWidget extends StatelessWidget {
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(defaultBorderRadius - 1),
-              child: Image(
+              child: CachedNetworkImage(
                 width: imageWidth,
                 height: imageHeight,
                 fit: BoxFit.cover,
-                image: CachedNetworkImageProvider(
-                  event.imageUrl,
+                imageUrl: event.imageUrl,
+                errorWidget: (_, __, ___) => Image.asset(
+                  noImagePlaceholderPath,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),

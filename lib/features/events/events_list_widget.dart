@@ -97,6 +97,7 @@ class EventsListWidget extends StatelessWidget {
             ],
           ),
         ),
+        // TODO: do the calculation of the height of the cards at this level and pass the value to the itemExtent in the builder
         Expanded(
           child: ListView.builder(
             itemBuilder: (context, index) => IndentWidget(
