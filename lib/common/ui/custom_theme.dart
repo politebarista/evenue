@@ -12,8 +12,6 @@ class CustomTheme {
         textTheme: _customTextTheme.getCustomTextTheme(),
         scaffoldBackgroundColor: CustomColorScheme.backgroundColor,
         colorScheme: ColorScheme(
-          secondaryVariant: Colors.green,
-          primaryVariant: Colors.red,
           onBackground: Colors.red,
           onSurface: Colors.red,
           surface: Colors.red,
