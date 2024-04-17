@@ -6,14 +6,57 @@ import 'package:evenue/common/ui/common_ui_provider.dart';
 import 'package:evenue/common/ui/constants.dart';
 import 'package:evenue/common/ui/custom_color_scheme.dart';
 import 'package:evenue/common/ui/custom_text_styles.dart';
+import 'package:evenue/common/ui/evenue_button.dart';
 import 'package:evenue/common/ui/indent_widget.dart';
+import 'package:evenue/features/ticket_purchase/entering_purchase_data/entering_purchase_data_screen.dart';
+import 'package:evenue/generated/l10n.dart';
 import 'package:evenue/models/event.dart';
+import 'package:evenue/stores/user_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
+import 'package:provider/provider.dart';
 
 class EventDetailsWidget extends StatelessWidget {
   final Event event;
 
   const EventDetailsWidget(this.event, {Key? key}) : super(key: key);
+
+  void _onBuyTicketButtonPressed(BuildContext context) {
+    if (context.read<UserStore>().isUserAuthorized) {
+      Navigator.of(context).push<void>(
+        MaterialPageRoute(
+          builder: (context) => EnteringPurchaseDataScreen(
+            event.id,
+            event.name,
+          ),
+        ),
+      );
+    } else {
+      showPlatformDialog<void>(
+        context: context,
+        builder: (_) => BasicDialogAlert(
+          title: Text(
+            S.of(context).eventDetailsTicketPurchaseUserNotAuthorizedErrorTitle,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          content: Text(
+            S.of(context).eventDetailsTicketPurchaseUserNotAuthorizedErrorDescription,
+            style: TextStyle(color: Colors.black),
+          ),
+          actions: [
+            BasicDialogAction(
+              title: Text(S.of(context).eventDetailsTicketPurchaseUserNotAuthorizedErrorButton),
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +136,11 @@ class EventDetailsWidget extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(height: 8),
+                EvenueButton(
+                  onTap: () => _onBuyTicketButtonPressed(context),
+                  text: S.of(context).eventDetailsBuyTicketButton,
                 ),
                 SizedBox(height: 8),
               ],

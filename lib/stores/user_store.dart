@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:evenue/features/city_choice/city_choice_user_store.dart';
 import 'package:evenue/models/customer.dart';
 import 'package:evenue/models/organizer.dart';
-import 'package:evenue/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // TODO: make keys private
@@ -18,10 +17,11 @@ class UserStore extends CityChoiceUserStore {
 
   String? _selectedCityId;
   Customer? _customer;
+  // TODO: think over the work of the organizer and its necessity in the application
   Organizer? _organizer;
 
   String? get selectedCityId => _selectedCityId;
-  User? get user => _customer ?? _organizer;
+  Customer? get user => _customer;
 
   bool get isUserAuthorized => user != null;
 

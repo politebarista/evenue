@@ -15,12 +15,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'generated/l10n.dart';
 
 void runner(Config config) async {
   runZonedGuarded(
     () async {
+      // ignore: unused_local_variable
       final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
+      // ignore: avoid-ignoring-return-values
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
@@ -43,6 +46,10 @@ void runner(Config config) async {
         OrganizerRepository(userStore, config.appDef),
         citiesRepository,
       );
+
+      // TODO: implement correct change of the locale 'cause this implementation is not working
+      // ignore: avoid-ignoring-return-values
+      await S.load(Locale('ru', 'RU'));
 
       runApp(
         MultiProvider(

@@ -1,6 +1,5 @@
 analyzer:
   exclude:
-    - lib/runner.dart
     - lib/models/*.g.dart
   plugins:
     - dart_code_metrics
@@ -39,6 +38,7 @@ dart_code_metrics:
     - prefer-extracting-callbacks:
         ignored-named-arguments:
           - listener
+        allowed-line-count: 5
     - prefer-first
     - prefer-last
     - prefer-match-file-name
