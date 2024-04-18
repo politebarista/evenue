@@ -11,39 +11,39 @@ class CustomTextTheme {
 
   TextTheme getCustomTextTheme() {
     return TextTheme(
-      headline1: _defaultTextTheme.headline1!.copyWith(
+      displayLarge: _defaultTextTheme.displayLarge!.copyWith(
         color: CustomColorScheme.textColor,
       ),
-      headline2: _defaultTextTheme.headline2!.copyWith(
+      displayMedium: _defaultTextTheme.displayMedium!.copyWith(
         color: CustomColorScheme.textColor,
       ),
-      headline3: _defaultTextTheme.headline3!.copyWith(
+      displaySmall: _defaultTextTheme.displaySmall!.copyWith(
         color: CustomColorScheme.textColor,
       ),
-      headline4: _defaultTextTheme.headline4!.copyWith(
+      headlineMedium: _defaultTextTheme.headlineMedium!.copyWith(
         color: CustomColorScheme.textColor,
       ),
-      headline5: _defaultTextTheme.headline5!.copyWith(
+      headlineSmall: _defaultTextTheme.headlineSmall!.copyWith(
         color: CustomColorScheme.textColor,
       ),
-      headline6: _defaultTextTheme.headline6!.copyWith(
+      titleLarge: _defaultTextTheme.titleLarge!.copyWith(
         color: CustomColorScheme.textColor,
       ),
-      subtitle1: _defaultTextTheme.subtitle1!.copyWith(
+      titleMedium: _defaultTextTheme.titleMedium!.copyWith(
         color: CustomColorScheme.textColor,
       ),
-      subtitle2: _defaultTextTheme.subtitle2!.copyWith(
+      titleSmall: _defaultTextTheme.titleSmall!.copyWith(
         color: CustomColorScheme.textColor,
       ),
-      bodyText1: _defaultTextTheme.bodyText1!,
-      bodyText2: _defaultTextTheme.bodyText2!,
-      caption: _defaultTextTheme.caption!.copyWith(
+      bodyLarge: _defaultTextTheme.bodyLarge!,
+      bodyMedium: _defaultTextTheme.bodyMedium!,
+      bodySmall: _defaultTextTheme.bodySmall!.copyWith(
         color: CustomColorScheme.textColor,
       ),
-      button: _defaultTextTheme.button!.copyWith(
+      labelLarge: _defaultTextTheme.labelLarge!.copyWith(
         color: CustomColorScheme.textColor,
       ),
-      overline: _defaultTextTheme.overline!.copyWith(
+      labelSmall: _defaultTextTheme.labelSmall!.copyWith(
         color: CustomColorScheme.textColor,
       ),
     );

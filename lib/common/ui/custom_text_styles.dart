@@ -12,7 +12,7 @@ class CustomTextStyles {
 
   TextStyle get description => TextStyle(
     color: Colors.black,
-    fontSize: 16
+    fontSize: 16,
   );
 
   TextStyle get cardTitle => TextStyle(

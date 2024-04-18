@@ -30,6 +30,54 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
     super.initState();
   }
 
+  void _login(final BuildContext context) {
+    if (!EmailHelper.isEmailValid(_emailTextController.text)) {
+      _showDialog(context, 'Email введен неверно');
+      return;
+    }
+
+    if (!PasswordHelper.isPasswordValid(_passwordTextController.text)) {
+      _showDialog(context, 'Пароль должен содержать не менее 5 символов');
+      return;
+    }
+
+    context.read<CustomerLoginBloc>().add(
+          LoginCustomerEvent(
+            _emailTextController.text,
+            _passwordTextController.text,
+          ),
+        );
+  }
+
+  void _showDialog(
+    final BuildContext context,
+    final String title, [
+    final String? content,
+  ]) =>
+      showPlatformDialog(
+        context: context,
+        builder: (_) => BasicDialogAlert(
+          title: Text(
+            title,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          content: content == null
+              ? null
+              : Text(
+                  content,
+                  style: TextStyle(color: Colors.black),
+                ),
+          actions: [
+            BasicDialogAction(
+              title: Text("Ок"),
+              onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+            ),
+          ],
+        ),
+      );
+
   // TODO add validation
   @override
   Widget build(BuildContext context) {
@@ -116,52 +164,4 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
       ),
     );
   }
-
-  void _login(final BuildContext context) {
-    if (!EmailHelper.isEmailValid(_emailTextController.text)) {
-      _showDialog(context, 'Email введен неверно');
-      return;
-    }
-
-    if (!PasswordHelper.isPasswordValid(_passwordTextController.text)) {
-      _showDialog(context, 'Пароль должен содержать не менее 5 символов');
-      return;
-    }
-
-    context.read<CustomerLoginBloc>().add(
-          LoginCustomerEvent(
-            _emailTextController.text,
-            _passwordTextController.text,
-          ),
-        );
-  }
-
-  void _showDialog(
-    final BuildContext context,
-    final String title, [
-    final String? content,
-  ]) =>
-      showPlatformDialog(
-        context: context,
-        builder: (_) => BasicDialogAlert(
-          title: Text(
-            title,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-          content: content == null
-              ? null
-              : Text(
-                  content,
-                  style: TextStyle(color: Colors.black),
-                ),
-          actions: [
-            BasicDialogAction(
-              title: Text("Ок"),
-              onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-            ),
-          ],
-        ),
-      );
 }

@@ -11,6 +11,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CityChoiceScreen extends StatelessWidget {
   const CityChoiceScreen({Key? key}) : super(key: key);
 
+  _chooseCity(BuildContext context, String cityId) =>
+      context.read<CityChoiceBloc>().add(
+            CityChoiceSaveSelectedCityEvent(cityId),
+          );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,9 +86,4 @@ class CityChoiceScreen extends StatelessWidget {
       ),
     );
   }
-
-  _chooseCity(BuildContext context, String cityId) =>
-      context.read<CityChoiceBloc>().add(
-            CityChoiceSaveSelectedCityEvent(cityId),
-          );
 }

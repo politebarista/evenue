@@ -1,6 +1,9 @@
 analyzer:
-    plugins:
-      - dart_code_metrics
+  exclude:
+    - lib/runner.dart
+    - lib/models/*.g.dart
+  plugins:
+    - dart_code_metrics
 
 dart_code_metrics:
   metrics-exclude:
@@ -15,6 +18,7 @@ dart_code_metrics:
     - test/**
     - lib/**/*.g.dart
     - lib/generated/**
+    - lib/firebase_options.dart
   rules:
     - always-remove-listener
     - avoid-ignoring-return-values

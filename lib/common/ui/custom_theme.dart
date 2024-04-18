@@ -6,23 +6,24 @@ import 'custom_color_scheme.dart';
 class CustomTheme {
   final CustomTextTheme _customTextTheme;
 
-  CustomTheme(this._customTextTheme);
-
   ThemeData get themeData => ThemeData(
-        textTheme: _customTextTheme.getCustomTextTheme(),
-        scaffoldBackgroundColor: CustomColorScheme.backgroundColor,
-        colorScheme: ColorScheme(
-          onBackground: Colors.red,
-          onSurface: Colors.red,
-          surface: Colors.red,
-          secondary: CustomColorScheme.secondaryColor,
-          onSecondary: CustomColorScheme.backgroundColor,
-          brightness: Brightness.light,
-          error: Colors.red,
-          background: Colors.red,
-          primary: CustomColorScheme.primaryColor,
-          onPrimary: CustomColorScheme.backgroundColor,
-          onError: Colors.red,
-        ),
-      );
+    textTheme: _customTextTheme.getCustomTextTheme(),
+    scaffoldBackgroundColor: CustomColorScheme.backgroundColor,
+    colorScheme: ColorScheme(
+      onBackground: Colors.yellow,
+      onSurface: Colors.green,
+      surface: Colors.brown,
+      secondary: CustomColorScheme.secondaryColor,
+      onSecondary: CustomColorScheme.backgroundColor,
+      brightness: Brightness.light,
+      error: Colors.orange,
+      background: Colors.cyan,
+      primary: CustomColorScheme.primaryColor,
+      // ignore: no-equal-arguments
+      onPrimary: CustomColorScheme.backgroundColor,
+      onError: Colors.red,
+    ),
+  );
+
+  CustomTheme(this._customTextTheme);
 }

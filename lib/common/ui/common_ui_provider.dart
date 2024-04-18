@@ -1,4 +1,3 @@
-import 'package:evenue/common/ui/custom_paddings.dart';
 import 'package:flutter/material.dart';
 
 CommonUiProvider commonUiProvider = CommonUiProvider();
@@ -11,9 +10,6 @@ class CommonUiProvider {
       spreadRadius: 1,
     ),
   ];
-
-  @deprecated
-  final CustomPaddings paddings = CustomPaddings();
 
   final divider = Divider(thickness: 1);
 }

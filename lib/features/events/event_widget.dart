@@ -19,6 +19,13 @@ class EventWidget extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  void _navigateToDetails(BuildContext context) => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => EventDetailsWidget(event),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     final double paddingAroundContent = 4;
@@ -34,9 +41,7 @@ class EventWidget extends StatelessWidget {
     final int descriptionMaxLines = 3;
 
     return GestureDetector(
-      onTap: () {
-        _navigateToDetails(context);
-      },
+      onTap: () => _navigateToDetails(context),
       child: Container(
         padding: EdgeInsets.all(paddingAroundContent),
         decoration: BoxDecoration(
@@ -62,14 +67,14 @@ class EventWidget extends StatelessWidget {
                           size: 16,
                           color: CustomColorScheme.primaryColor,
                         ),
-                        commonUiProvider.paddings.h4,
+                        SizedBox(width: 4),
                         Text(
                           event.startDate.date,
                           style: customTextStyles.cardDate,
                         ),
                       ],
                     ),
-                    commonUiProvider.paddings.v4,
+                    SizedBox(height: 4),
                     Text(
                       event.name,
                       style: customTextStyles.cardTitle,
@@ -109,11 +114,4 @@ class EventWidget extends StatelessWidget {
       ),
     );
   }
-
-  void _navigateToDetails(BuildContext context) => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => EventDetailsWidget(event),
-        ),
-      );
 }

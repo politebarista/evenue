@@ -26,7 +26,7 @@ class EventDetailsWidget extends StatelessWidget {
             color: CustomColorScheme.backgroundColor,
             size: 30,
           ),
-          commonUiProvider.paddings.h12,
+          SizedBox(width: 12),
         ],
       ),
       body: IndentWidget(
@@ -59,14 +59,14 @@ class EventDetailsWidget extends StatelessWidget {
                   event.description,
                   style: customTextStyles.description,
                 ),
-                commonUiProvider.paddings.v16,
+                SizedBox(height: 16),
                 Row(
                   children: [
                     Icon(
                       Icons.event,
                       color: CustomColorScheme.primaryColor,
                     ),
-                    commonUiProvider.paddings.h8,
+                    SizedBox(width: 8),
                     Text(
                       EventDateHelper.getDurationBetween(
                         event.startDate,
@@ -85,7 +85,7 @@ class EventDetailsWidget extends StatelessWidget {
                       Icons.paid_outlined,
                       color: CustomColorScheme.primaryColor,
                     ),
-                    commonUiProvider.paddings.h8,
+                    SizedBox(width: 8),
                     Text(
                       PriceFormatter.getFormattedPrice(event.price),
                       style: customTextStyles.description.copyWith(

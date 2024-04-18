@@ -30,6 +30,54 @@ class _OrganizerLoginScreenState extends State<OrganizerLoginScreen> {
     super.initState();
   }
 
+  void _login(final BuildContext context) {
+    if (!EmailHelper.isEmailValid(_contactPersonEmailTextController.text)) {
+      _showDialog(context, 'Email введен неверно');
+      return;
+    }
+
+    if (!PasswordHelper.isPasswordValid(_passwordTextController.text)) {
+      _showDialog(context, 'Пароль введен неверно');
+      return;
+    }
+
+    context.read<OrganizerLoginBloc>().add(
+          LoginOrganizerEvent(
+            _contactPersonEmailTextController.text,
+            _passwordTextController.text,
+          ),
+        );
+  }
+
+  void _showDialog(
+    final BuildContext context,
+    final String title, [
+    final String? content,
+  ]) =>
+      showPlatformDialog(
+        context: context,
+        builder: (_) => BasicDialogAlert(
+          title: Text(
+            title,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          content: content == null
+              ? null
+              : Text(
+                  content,
+                  style: TextStyle(color: Colors.black),
+                ),
+          actions: [
+            BasicDialogAction(
+              title: Text("Ок"),
+              onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+            ),
+          ],
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,52 +150,4 @@ class _OrganizerLoginScreenState extends State<OrganizerLoginScreen> {
       ),
     );
   }
-
-  void _login(final BuildContext context) {
-    if (!EmailHelper.isEmailValid(_contactPersonEmailTextController.text)) {
-      _showDialog(context, 'Email введен неверно');
-      return;
-    }
-
-    if (!PasswordHelper.isPasswordValid(_passwordTextController.text)) {
-      _showDialog(context, 'Пароль введен неверно');
-      return;
-    }
-
-    context.read<OrganizerLoginBloc>().add(
-          LoginOrganizerEvent(
-            _contactPersonEmailTextController.text,
-            _passwordTextController.text,
-          ),
-        );
-  }
-
-  void _showDialog(
-    final BuildContext context,
-    final String title, [
-    final String? content,
-  ]) =>
-      showPlatformDialog(
-        context: context,
-        builder: (_) => BasicDialogAlert(
-          title: Text(
-            title,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-          content: content == null
-              ? null
-              : Text(
-                  content,
-                  style: TextStyle(color: Colors.black),
-                ),
-          actions: [
-            BasicDialogAction(
-              title: Text("Ок"),
-              onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-            ),
-          ],
-        ),
-      );
 }
