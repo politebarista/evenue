@@ -5,6 +5,7 @@ import 'package:evenue/features/navigation_controller/navigation_controller_widg
 import 'package:evenue/generated/l10n.dart';
 import 'package:evenue/stores/user_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 class Evenue extends StatelessWidget {
@@ -17,8 +18,14 @@ class Evenue extends StatelessWidget {
 
     return MaterialApp(
       theme: customTheme.themeData,
-      localizationsDelegates: [S.delegate],
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       supportedLocales: S.delegate.supportedLocales,
+      locale: Locale('ru'),
       home: context.read<UserStore>().selectedCityId != null
           ? NavigationControllerWidget()
           : CityChoiceScreen(),

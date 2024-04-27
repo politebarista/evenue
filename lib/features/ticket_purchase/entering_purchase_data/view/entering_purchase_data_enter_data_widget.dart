@@ -1,6 +1,5 @@
 part of '../entering_purchase_data_screen.dart';
 
-// TODO: text fields errors and really weird positioned - need to fix
 // TODO: add more description for the user of what is happening on the screen
 class _EnteringPurchaseDataEnterDataWidget extends StatefulWidget {
   const _EnteringPurchaseDataEnterDataWidget({super.key});
@@ -109,6 +108,7 @@ class _EnteringPurchaseDataEnterDataWidgetState
             Padding(
               padding: EdgeInsets.only(bottom: textFieldsBottomPadding),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Flexible(
                     child: CustomTextField(
@@ -154,7 +154,6 @@ class _EnteringPurchaseDataEnterDataWidgetState
                 validator: validateCardHolderName,
               ),
             ),
-            // TODO: add inserting from stored user info
             Padding(
               padding: EdgeInsets.only(bottom: textFieldsBottomPadding),
               child: CustomTextField(
