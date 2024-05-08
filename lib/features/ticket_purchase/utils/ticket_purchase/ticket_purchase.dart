@@ -9,5 +9,5 @@ abstract interface class TicketPurchase {
     String customerEmail,
   );
 
-  Future<bool> confirmPurchase(String paymentId, String confirmationCode);
+  Future<void> confirmPurchase(String paymentId, String confirmationCode);
 }

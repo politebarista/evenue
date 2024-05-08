@@ -8,7 +8,7 @@ import 'package:evenue/common/ui/custom_color_scheme.dart';
 import 'package:evenue/common/ui/custom_text_styles.dart';
 import 'package:evenue/common/ui/evenue_button.dart';
 import 'package:evenue/common/ui/indent_widget.dart';
-import 'package:evenue/features/ticket_purchase/entering_purchase_data/entering_purchase_data_screen.dart';
+import 'package:evenue/features/ticket_purchase/ticket_purchase_screen.dart';
 import 'package:evenue/generated/l10n.dart';
 import 'package:evenue/models/event.dart';
 import 'package:evenue/stores/user_store.dart';
@@ -25,9 +25,9 @@ class EventDetailsWidget extends StatelessWidget {
     if (context.read<UserStore>().isUserAuthorized) {
       Navigator.of(context).push<void>(
         MaterialPageRoute(
-          builder: (context) => EnteringPurchaseDataScreen(
-            event.id,
-            event.name,
+          builder: (context) => TicketPurchaseScreen(
+            eventId: event.id,
+            eventName: event.name,
           ),
         ),
       );

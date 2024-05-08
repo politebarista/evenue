@@ -20,8 +20,36 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(eventName) =>
+      "After entering the code and pressing on the \"Confirm purchase\" button, you will purchase tickets for the event \"${eventName}\"";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "confirmPurchaseConfirmButton":
+            MessageLookupByLibrary.simpleMessage("Confirm the purchase"),
+        "confirmPurchaseConfirmationCodeFieldLabel":
+            MessageLookupByLibrary.simpleMessage("Confirmation code"),
+        "confirmPurchaseDescription": m0,
+        "confirmPurchaseDescriptionWithoutEventName":
+            MessageLookupByLibrary.simpleMessage(
+                "After entering the code and pressing on the \"Confirm purchase\" button, you will purchase tickets for the event"),
+        "confirmPurchaseErrorDialogButton":
+            MessageLookupByLibrary.simpleMessage("Ok"),
+        "confirmPurchaseErrorDialogTitle":
+            MessageLookupByLibrary.simpleMessage("Oops.. Error"),
+        "confirmPurchaseIncorrectConfirmationCodeError":
+            MessageLookupByLibrary.simpleMessage(
+                "Check the correctness of the entered code"),
+        "confirmPurchaseSuccessfullyPurchaseDialogButton":
+            MessageLookupByLibrary.simpleMessage("Ok"),
+        "confirmPurchaseSuccessfullyPurchaseDialogDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "The ticket was successfully purchased. Thanks for the purchase"),
+        "confirmPurchaseSuccessfullyPurchaseDialogTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "The ticket has been purchased"),
+        "confirmPurchaseTitle":
+            MessageLookupByLibrary.simpleMessage("Confirmation of purchase"),
         "enteringPurchaseDataCardCVVFieldLabel":
             MessageLookupByLibrary.simpleMessage("CVV"),
         "enteringPurchaseDataCardCVVValidateError":
@@ -60,6 +88,10 @@ class MessageLookup extends MessageLookupByLibrary {
                 "To purchase a ticket, please log in or register first"),
         "eventDetailsTicketPurchaseUserNotAuthorizedErrorTitle":
             MessageLookupByLibrary.simpleMessage("Authorization is required"),
+        "evenueDialogDefaultButton": MessageLookupByLibrary.simpleMessage("Ok"),
+        "ticketPurchaseIncorrectConfirmationPurchaseCodeError":
+            MessageLookupByLibrary.simpleMessage(
+                "The confirmation code was entered incorrectly"),
         "ticketPurchaseIncorrectCustomerInformationError":
             MessageLookupByLibrary.simpleMessage(
                 "There is no user with this Email address. Please log in before purchasing"),
@@ -69,6 +101,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "ticketPurchaseIncorrectPaymentCardInformationError":
             MessageLookupByLibrary.simpleMessage(
                 "The bank card details are entered incorrectly. Please check them out"),
+        "ticketPurchaseNoAwaitingPaymentTicketError":
+            MessageLookupByLibrary.simpleMessage(
+                "An error occurred during the purchase of the ticket. You may have spent more than 15 minutes entering the confirmation code. Please try again"),
         "ticketPurchaseNoTicketsLeftForEventError":
             MessageLookupByLibrary.simpleMessage(
                 "All tickets for this event were sold out"),

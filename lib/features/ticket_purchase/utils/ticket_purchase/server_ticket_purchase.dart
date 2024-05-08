@@ -57,8 +57,25 @@ final class ServerTicketPurchase implements TicketPurchase {
   }
 
   @override
-  Future<bool> confirmPurchase(String paymentId, String confirmationCode) {
-    // TODO: implement confirmPurchase
-    throw UnimplementedError();
+  Future<void> confirmPurchase(
+    String paymentId,
+    String confirmationCode,
+  ) async {
+    final requestBody = jsonEncode(<String, dynamic>{
+      'awaitingPaymentTicketId': paymentId,
+      'confirmationCode': confirmationCode,
+    });
+
+    final response = await http.post(
+      Uri.parse(_appDef.baseUrl + 'ticket/confirmPurchase'),
+      headers: {'Content-Type': 'application/json; charset=UTF-8'},
+      body: requestBody,
+    );
+    final body = response.body;
+
+    final error = TicketPurchaseErrorMapper.getErrorFromCode(body);
+    if (error != null) {
+      throw error;
+    }
   }
 }

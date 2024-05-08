@@ -279,6 +279,146 @@ class S {
       args: [],
     );
   }
+
+  /// `An error occurred during the purchase of the ticket. You may have spent more than 15 minutes entering the confirmation code. Please try again`
+  String get ticketPurchaseNoAwaitingPaymentTicketError {
+    return Intl.message(
+      'An error occurred during the purchase of the ticket. You may have spent more than 15 minutes entering the confirmation code. Please try again',
+      name: 'ticketPurchaseNoAwaitingPaymentTicketError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The confirmation code was entered incorrectly`
+  String get ticketPurchaseIncorrectConfirmationPurchaseCodeError {
+    return Intl.message(
+      'The confirmation code was entered incorrectly',
+      name: 'ticketPurchaseIncorrectConfirmationPurchaseCodeError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirmation of purchase`
+  String get confirmPurchaseTitle {
+    return Intl.message(
+      'Confirmation of purchase',
+      name: 'confirmPurchaseTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `After entering the code and pressing on the "Confirm purchase" button, you will purchase tickets for the event "{eventName}"`
+  String confirmPurchaseDescription(Object eventName) {
+    return Intl.message(
+      'After entering the code and pressing on the "Confirm purchase" button, you will purchase tickets for the event "$eventName"',
+      name: 'confirmPurchaseDescription',
+      desc: '',
+      args: [eventName],
+    );
+  }
+
+  /// `After entering the code and pressing on the "Confirm purchase" button, you will purchase tickets for the event`
+  String get confirmPurchaseDescriptionWithoutEventName {
+    return Intl.message(
+      'After entering the code and pressing on the "Confirm purchase" button, you will purchase tickets for the event',
+      name: 'confirmPurchaseDescriptionWithoutEventName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirmation code`
+  String get confirmPurchaseConfirmationCodeFieldLabel {
+    return Intl.message(
+      'Confirmation code',
+      name: 'confirmPurchaseConfirmationCodeFieldLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check the correctness of the entered code`
+  String get confirmPurchaseIncorrectConfirmationCodeError {
+    return Intl.message(
+      'Check the correctness of the entered code',
+      name: 'confirmPurchaseIncorrectConfirmationCodeError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm the purchase`
+  String get confirmPurchaseConfirmButton {
+    return Intl.message(
+      'Confirm the purchase',
+      name: 'confirmPurchaseConfirmButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The ticket has been purchased`
+  String get confirmPurchaseSuccessfullyPurchaseDialogTitle {
+    return Intl.message(
+      'The ticket has been purchased',
+      name: 'confirmPurchaseSuccessfullyPurchaseDialogTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The ticket was successfully purchased. Thanks for the purchase`
+  String get confirmPurchaseSuccessfullyPurchaseDialogDescription {
+    return Intl.message(
+      'The ticket was successfully purchased. Thanks for the purchase',
+      name: 'confirmPurchaseSuccessfullyPurchaseDialogDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get confirmPurchaseSuccessfullyPurchaseDialogButton {
+    return Intl.message(
+      'Ok',
+      name: 'confirmPurchaseSuccessfullyPurchaseDialogButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oops.. Error`
+  String get confirmPurchaseErrorDialogTitle {
+    return Intl.message(
+      'Oops.. Error',
+      name: 'confirmPurchaseErrorDialogTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get confirmPurchaseErrorDialogButton {
+    return Intl.message(
+      'Ok',
+      name: 'confirmPurchaseErrorDialogButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get evenueDialogDefaultButton {
+    return Intl.message(
+      'Ok',
+      name: 'evenueDialogDefaultButton',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -2,7 +2,7 @@ part of '../entering_purchase_data_screen.dart';
 
 // TODO: add more description for the user of what is happening on the screen
 class _EnteringPurchaseDataEnterDataWidget extends StatefulWidget {
-  const _EnteringPurchaseDataEnterDataWidget({super.key});
+  const _EnteringPurchaseDataEnterDataWidget();
 
   @override
   State<_EnteringPurchaseDataEnterDataWidget> createState() =>

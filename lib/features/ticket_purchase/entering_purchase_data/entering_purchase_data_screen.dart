@@ -1,4 +1,3 @@
-import 'package:evenue/common/config.dart';
 import 'package:evenue/common/email_helper.dart';
 import 'package:evenue/common/ui/custom_text_field.dart';
 import 'package:evenue/common/ui/evenue_button.dart';
@@ -6,7 +5,6 @@ import 'package:evenue/common/ui/indent_widget.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
 import 'package:evenue/common/ui/upper_case_text_input_formatter.dart';
 import 'package:evenue/features/ticket_purchase/entering_purchase_data/bloc/entering_purchase_data_bloc.dart';
-import 'package:evenue/features/ticket_purchase/utils/ticket_purchase/server_ticket_purchase.dart';
 import 'package:evenue/features/ticket_purchase/utils/ticket_purchase/ticket_purchase.dart';
 import 'package:evenue/features/ticket_purchase/utils/ticket_purchase_error.dart';
 import 'package:evenue/generated/l10n.dart';
@@ -16,6 +14,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+// ignore: unnecessary_import
+import 'package:provider/provider.dart';
+
+import '../confirm_purchase/confirm_purchase_screen.dart';
 
 part 'view/entering_purchase_data_enter_data_widget.dart';
 
@@ -30,6 +32,7 @@ class EnteringPurchaseDataScreen extends StatelessWidget {
     final String content,
     final bool isCritical,
   ) =>
+  // TODO: switch with showEvenueDialog
       showPlatformDialog(
         context: context,
         builder: (_) => BasicDialogAlert(
@@ -57,15 +60,14 @@ class EnteringPurchaseDataScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TicketPurchase ticketPurchase = ServerTicketPurchase(
-      context.read<Config>().appDef,
-    );
-
     return Scaffold(
       appBar: AppBar(title: Text(eventName)),
       body: SafeArea(
         child: BlocProvider<EnteringPurchaseDataBloc>(
-          create: (_) => EnteringPurchaseDataBloc(ticketPurchase, eventId),
+          create: (context) => EnteringPurchaseDataBloc(
+            context.read<TicketPurchase>(),
+            eventId,
+          ),
           child: BlocConsumer<EnteringPurchaseDataBloc, EnteringPurchaseDataState>(
             buildWhen: (_, current) => current is EnteringPurchaseDataPendingState ||
               current is EnteringPurchaseDataEnterDataState,
@@ -97,7 +99,13 @@ class EnteringPurchaseDataScreen extends StatelessWidget {
 
                 _showErrorDialog(context, errorText, isErrorCritical);
               } else if (state is EnteringPurchaseDataSuccessfullyState) {
-                print('all successful - payment id is ${state.paymentId}');
+                Navigator.of(context).push<void>(
+                  MaterialPageRoute(
+                    builder: (context) => ConfirmPurchaseScreen(
+                      state.paymentId,
+                    ),
+                  ),
+                );
               } else {
                 throw UnimplementedError();
               }

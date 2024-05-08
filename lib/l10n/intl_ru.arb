@@ -22,5 +22,19 @@
   "ticketPurchaseIncorrectPaymentCardInformationError": "Реквизиты банковской карты введены неверное. Пожалуйста проверьте их",
   "ticketPurchaseIncorrectEventInformationError": "Данного мероприятия нет. Возможно оно было отменено",
   "ticketPurchaseIncorrectCustomerInformationError": "Пользователя с таким Email нет. Пожалуйста авторизуйтесь перед покупкой",
-  "ticketPurchaseUnknownError": "Во время покупки билета произошла непредвиденная ошибка. Пожалуйста попробуйте позже"
+  "ticketPurchaseUnknownError": "Во время покупки билета произошла непредвиденная ошибка. Пожалуйста попробуйте позже",
+  "ticketPurchaseNoAwaitingPaymentTicketError": "Во время покупки билета произошла ошибка. Возможно вы потратили на ввод кода подтверждение более 15 минут. Пожалуйста попробуйте ещё раз",
+  "ticketPurchaseIncorrectConfirmationPurchaseCodeError": "Код подтверждения покупки был введён неверно",
+  "confirmPurchaseTitle": "Подтверждение покупки",
+  "confirmPurchaseDescription": "После ввода кода и нажатия на кнопку \"Подтвердить покупку\" вы приобретёте билеты на мероприятие \"{eventName}\"",
+  "confirmPurchaseDescriptionWithoutEventName": "После ввода кода и нажатия на кнопку \"Подтвердить покупку\" вы приобретёте билеты на мероприятие",
+  "confirmPurchaseConfirmationCodeFieldLabel": "Код подтверждения",
+  "confirmPurchaseIncorrectConfirmationCodeError": "Проверьте правильность введённого кода",
+  "confirmPurchaseConfirmButton": "Подтвердить покупку",
+  "confirmPurchaseSuccessfullyPurchaseDialogTitle": "Билет приобретен",
+  "confirmPurchaseSuccessfullyPurchaseDialogDescription": "Билет был успешно приобретен. Спасибо за покупку",
+  "confirmPurchaseSuccessfullyPurchaseDialogButton": "Ок",
+  "confirmPurchaseErrorDialogTitle": "Упс.. Ошибка",
+  "confirmPurchaseErrorDialogButton": "Ок",
+  "evenueDialogDefaultButton": "Ок"
 }
