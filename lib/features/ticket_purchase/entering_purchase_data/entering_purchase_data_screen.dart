@@ -1,6 +1,7 @@
 import 'package:evenue/common/email_helper.dart';
 import 'package:evenue/common/ui/custom_text_field.dart';
 import 'package:evenue/common/ui/evenue_button.dart';
+import 'package:evenue/common/ui/evenue_dialog.dart';
 import 'package:evenue/common/ui/indent_widget.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
 import 'package:evenue/common/ui/upper_case_text_input_formatter.dart';
@@ -12,8 +13,8 @@ import 'package:evenue/stores/user_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
 // ignore: unnecessary_import
 import 'package:provider/provider.dart';
 
@@ -32,36 +33,32 @@ class EnteringPurchaseDataScreen extends StatelessWidget {
     final String content,
     final bool isCritical,
   ) =>
-  // TODO: switch with showEvenueDialog
-      showPlatformDialog(
+      showEvenueDialog(
         context: context,
-        builder: (_) => BasicDialogAlert(
-          title: Text(
-            S.of(context).enteringPurchaseDataErrorDialogTitle,
-            style: TextStyle(
-              color: Colors.black,
-            ),
+        title: S.of(context).enteringPurchaseDataErrorDialogTitle,
+        content: content,
+        actions: [
+          EvenueDialogAction(
+            S.of(context).enteringPurchaseDataErrorDialogButton,
+            () {
+              Navigator.of(context, rootNavigator: true).pop();
+              if (isCritical) Navigator.of(context, rootNavigator: true).pop();
+            },
           ),
-          content: Text(
-            content,
-            style: TextStyle(color: Colors.black),
-          ),
-          actions: [
-            BasicDialogAction(
-              title: Text(S.of(context).enteringPurchaseDataErrorDialogButton),
-              onPressed: () {
-                Navigator.of(context, rootNavigator: true).pop();
-                if (isCritical) Navigator.of(context, rootNavigator: true).pop();
-              },
-            ),
-          ],
-        ),
+        ],
       );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(eventName)),
+      appBar: AppBar(
+        title: Text(eventName),
+        leading: MaterialButton(
+          child: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+          shape: CircleBorder(),
+        ),
+      ),
       body: SafeArea(
         child: BlocProvider<EnteringPurchaseDataBloc>(
           create: (context) => EnteringPurchaseDataBloc(

@@ -86,89 +86,91 @@ class _EnteringPurchaseDataEnterDataWidgetState
     return Form(
       key: formKey,
       child: IndentWidget(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: textFieldsBottomPadding,
-              ),
-              child: CustomTextField(
-                controller: cardNumberController,
-                label: S.of(context).enteringPurchaseDataCardNumberFieldLabel,
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  MaskTextInputFormatter(
-                    mask: '#### #### #### ####',
-                    filter: {'#': RegExp(r'[0-9]')},
-                  ),
-                ],
-                validator: validateCardNumber,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: textFieldsBottomPadding),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Flexible(
-                    child: CustomTextField(
-                      controller: cardExpirationDateController,
-                      label: S.of(context).enteringPurchaseDataCardExpirationDateFieldLabel,
-                      keyboardType: TextInputType.number,
-                      hintText: S.of(context).enteringPurchaseDataCardExpirationDateFieldHint,
-                      inputFormatters: [
-                        MaskTextInputFormatter(
-                          mask: '##/##',
-                          filter: {'#': RegExp(r'[0-9]')},
-                        ),
-                      ],
-                      validator: validateExpirationDate,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: textFieldsBottomPadding,
+                ),
+                child: CustomTextField(
+                  controller: cardNumberController,
+                  label: S.of(context).enteringPurchaseDataCardNumberFieldLabel,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    MaskTextInputFormatter(
+                      mask: '#### #### #### ####',
+                      filter: {'#': RegExp(r'[0-9]')},
                     ),
-                  ),
-                  SizedBox(width: 20),
-                  Flexible(
-                    child: CustomTextField(
-                      controller: cardCvvController,
-                      label: S.of(context).enteringPurchaseDataCardCVVFieldLabel,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(3),
-                      ],
-                      validator: validateCVV,
+                  ],
+                  validator: validateCardNumber,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: textFieldsBottomPadding),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      child: CustomTextField(
+                        controller: cardExpirationDateController,
+                        label: S.of(context).enteringPurchaseDataCardExpirationDateFieldLabel,
+                        keyboardType: TextInputType.number,
+                        hintText: S.of(context).enteringPurchaseDataCardExpirationDateFieldHint,
+                        inputFormatters: [
+                          MaskTextInputFormatter(
+                            mask: '##/##',
+                            filter: {'#': RegExp(r'[0-9]')},
+                          ),
+                        ],
+                        validator: validateExpirationDate,
+                      ),
                     ),
-                  ),
-                ],
+                    SizedBox(width: 20),
+                    Flexible(
+                      child: CustomTextField(
+                        controller: cardCvvController,
+                        label: S.of(context).enteringPurchaseDataCardCVVFieldLabel,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(3),
+                        ],
+                        validator: validateCVV,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: textFieldsBottomPadding),
-              child: CustomTextField(
-                controller: cardHolderNameController,
-                label: S.of(context).enteringPurchaseDataCardHolderFieldLabel,
-                keyboardType: TextInputType.name,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]|\s')),
-                  UpperCaseTextInputFormatter(),
-                ],
-                validator: validateCardHolderName,
+              Padding(
+                padding: EdgeInsets.only(bottom: textFieldsBottomPadding),
+                child: CustomTextField(
+                  controller: cardHolderNameController,
+                  label: S.of(context).enteringPurchaseDataCardHolderFieldLabel,
+                  keyboardType: TextInputType.name,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]|\s')),
+                    UpperCaseTextInputFormatter(),
+                  ],
+                  validator: validateCardHolderName,
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: textFieldsBottomPadding),
-              child: CustomTextField(
-                controller: emailController,
-                label: S.of(context).enteringPurchaseDataEmailFieldLabel,
-                keyboardType: TextInputType.emailAddress,
-                validator: validateEmail,
-                enabled: false,
+              Padding(
+                padding: EdgeInsets.only(bottom: textFieldsBottomPadding),
+                child: CustomTextField(
+                  controller: emailController,
+                  label: S.of(context).enteringPurchaseDataEmailFieldLabel,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: validateEmail,
+                  enabled: false,
+                ),
               ),
-            ),
-            EvenueButton(
-              onTap: onSendDataButtonPressed,
-              text: S.of(context).enteringPurchaseDataContinueButton,
-            ),
-          ],
+              EvenueButton(
+                onTap: onSendDataButtonPressed,
+                text: S.of(context).enteringPurchaseDataContinueButton,
+              ),
+            ],
+          ),
         ),
       ),
     );
