@@ -46,6 +46,7 @@ class EnteringPurchaseDataScreen extends StatelessWidget {
             },
           ),
         ],
+        canPop: false,
       );
 
   @override

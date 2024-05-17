@@ -65,6 +65,7 @@ class ConfirmPurchaseScreen extends StatelessWidget {
                     },
                   ),
                 ],
+                canPop: false,
               );
             } else if (state is ConfirmPurchaseSuccessfullyState) {
               showEvenueDialog<void>(
@@ -79,6 +80,7 @@ class ConfirmPurchaseScreen extends StatelessWidget {
                     },
                   ),
                 ],
+                canPop: false,
               );
             } else {
               throw UnimplementedError();

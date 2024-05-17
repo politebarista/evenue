@@ -7,30 +7,34 @@ Future<T?> showEvenueDialog<T>({
   required String title,
   String? content,
   Iterable<EvenueDialogAction>? actions,
+  bool canPop = true,
 }) => showPlatformDialog<T>(
   context: context,
-  builder: (_) => BasicDialogAlert(
-    title: Text(
-      title,
-      style: TextStyle(
-        color: Colors.black,
+  builder: (_) => WillPopScope(
+    onWillPop: () async => canPop,
+    child: BasicDialogAlert(
+      title: Text(
+        title,
+        style: TextStyle(
+          color: Colors.black,
+        ),
       ),
+      content: content != null ? Text(
+        content,
+        style: TextStyle(color: Colors.black),
+      ) : null,
+      actions: actions != null
+        ? actions.map((e) => BasicDialogAction(
+            title: Text(e.title),
+            onPressed: e.onPressed,
+          )).toList()
+        : [
+            BasicDialogAction(
+              title: Text(S.current.evenueDialogDefaultButton),
+              onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+            ),
+          ],
     ),
-    content: content != null ? Text(
-      content,
-      style: TextStyle(color: Colors.black),
-    ) : null,
-    actions: actions != null
-      ? actions.map((e) => BasicDialogAction(
-          title: Text(e.title),
-          onPressed: e.onPressed,
-        )).toList()
-      : [
-          BasicDialogAction(
-            title: Text(S.current.evenueDialogDefaultButton),
-            onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-          ),
-        ],
   ),
 );
 
