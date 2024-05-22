@@ -1,6 +1,10 @@
 {
   "@@locale": "ru",
-  "eventDetailsBuyTicketButton": "Купить билет",
+  "eventDetailsBuyTicketAvailableButton": "Купить билет",
+  "eventDetailsBuyTicketUnavailableButton": "Нет билетов в продаже",
+  "eventDetailsLoadingEventInfoErrorDialogTitle": "Упс.. Ошибка",
+  "eventDetailsLoadingEventInfoErrorDialogDescription": "Данного мероприятия нет. Возможно оно было отменено",
+  "eventDetailsLoadingEventInfoErrorDialogOkButton": "Ок",
   "eventDetailsTicketPurchaseUserNotAuthorizedErrorTitle": "Необходима авторизация",
   "eventDetailsTicketPurchaseUserNotAuthorizedErrorDescription": "Для совершения покупки билета пожалуйста сначала авторизуйтесь или зарегистрируйтесь",
   "eventDetailsTicketPurchaseUserNotAuthorizedErrorButton": "Ок",

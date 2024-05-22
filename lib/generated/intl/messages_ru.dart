@@ -79,8 +79,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ок"),
         "enteringPurchaseDataErrorDialogTitle":
             MessageLookupByLibrary.simpleMessage("Ошибка"),
-        "eventDetailsBuyTicketButton":
+        "eventDetailsBuyTicketAvailableButton":
             MessageLookupByLibrary.simpleMessage("Купить билет"),
+        "eventDetailsBuyTicketUnavailableButton":
+            MessageLookupByLibrary.simpleMessage("Нет билетов в продаже"),
+        "eventDetailsLoadingEventInfoErrorDialogDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "Данного мероприятия нет. Возможно оно было отменено"),
+        "eventDetailsLoadingEventInfoErrorDialogOkButton":
+            MessageLookupByLibrary.simpleMessage("Ок"),
+        "eventDetailsLoadingEventInfoErrorDialogTitle":
+            MessageLookupByLibrary.simpleMessage("Упс.. Ошибка"),
         "eventDetailsTicketPurchaseUserNotAuthorizedErrorButton":
             MessageLookupByLibrary.simpleMessage("Ок"),
         "eventDetailsTicketPurchaseUserNotAuthorizedErrorDescription":

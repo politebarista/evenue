@@ -1,10 +1,17 @@
-import 'package:evenue/common/config.dart';
+import 'package:evenue/common/ui/indent_widget.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
+import 'package:evenue/event_sorting/event_sorting_by_date.dart';
+import 'package:evenue/event_sorting/event_sorting_by_name.dart';
+import 'package:evenue/event_sorting/event_sorting_by_price.dart';
 import 'package:evenue/features/city_choice/city_choice_screen.dart';
 import 'package:evenue/features/events/events_bloc.dart';
-import 'package:evenue/features/events/events_list_widget.dart';
+import 'package:evenue/stores/repositories_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'event_card.dart';
+
+part 'events_list_widget.dart';
 
 class EventsScreen extends StatelessWidget {
   final String cityId;
@@ -32,7 +39,7 @@ class EventsScreen extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => EventsBloc(
-          context.read<Config>(),
+          context.read<RepositoriesStore>().eventsRepository,
         )..add(GetEventsEvent(cityId)),
         child: Scaffold(
           body: BlocBuilder<EventsBloc, EventsState>(
@@ -40,7 +47,7 @@ class EventsScreen extends StatelessWidget {
               if (state is EventsPendingState) {
                 return Center(child: PendingWidget());
               } else if (state is EventsDefaultState) {
-                return EventsListWidget(state: state);
+                return _EventsListWidget(state: state);
               } else if (state is EventsErrorState) {
                 return Text('error');
               } else {

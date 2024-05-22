@@ -51,10 +51,50 @@ class S {
   }
 
   /// `Buy a ticket`
-  String get eventDetailsBuyTicketButton {
+  String get eventDetailsBuyTicketAvailableButton {
     return Intl.message(
       'Buy a ticket',
-      name: 'eventDetailsBuyTicketButton',
+      name: 'eventDetailsBuyTicketAvailableButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There are no tickets`
+  String get eventDetailsBuyTicketUnavailableButton {
+    return Intl.message(
+      'There are no tickets',
+      name: 'eventDetailsBuyTicketUnavailableButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oops.. Error`
+  String get eventDetailsLoadingEventInfoErrorDialogTitle {
+    return Intl.message(
+      'Oops.. Error',
+      name: 'eventDetailsLoadingEventInfoErrorDialogTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is no such event. It may have been canceled`
+  String get eventDetailsLoadingEventInfoErrorDialogDescription {
+    return Intl.message(
+      'There is no such event. It may have been canceled',
+      name: 'eventDetailsLoadingEventInfoErrorDialogDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get eventDetailsLoadingEventInfoErrorDialogOkButton {
+    return Intl.message(
+      'Ok',
+      name: 'eventDetailsLoadingEventInfoErrorDialogOkButton',
       desc: '',
       args: [],
     );

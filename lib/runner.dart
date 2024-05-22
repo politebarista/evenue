@@ -7,6 +7,7 @@ import 'package:evenue/repositories/cities_repository/cities_repository.dart';
 import 'package:evenue/repositories/cities_repository/mock_cities_repository.dart';
 import 'package:evenue/repositories/cities_repository/server_cities_repository.dart';
 import 'package:evenue/repositories/customer_repository.dart';
+import 'package:evenue/repositories/events_repository/server_events_repository.dart';
 import 'package:evenue/repositories/organizer_repository.dart';
 import 'package:evenue/stores/repositories_store.dart';
 import 'package:evenue/stores/user_store.dart';
@@ -41,9 +42,10 @@ void runner(Config config) async {
       }
 
       final repositoriesStore = RepositoriesStore(
-        CustomerRepository(userStore, config.appDef),
-        OrganizerRepository(userStore, config.appDef),
-        citiesRepository,
+        customerRepository: CustomerRepository(userStore, config.appDef),
+        organizerRepository: OrganizerRepository(userStore, config.appDef),
+        citiesRepository: citiesRepository,
+        eventsRepository:  ServerEventsRepository(config.appDef),
       );
 
       runApp(

@@ -1,6 +1,10 @@
 {
   "@@locale": "en",
-  "eventDetailsBuyTicketButton": "Buy a ticket",
+  "eventDetailsBuyTicketAvailableButton": "Buy a ticket",
+  "eventDetailsBuyTicketUnavailableButton": "There are no tickets",
+  "eventDetailsLoadingEventInfoErrorDialogTitle": "Oops.. Error",
+  "eventDetailsLoadingEventInfoErrorDialogDescription": "There is no such event. It may have been canceled",
+  "eventDetailsLoadingEventInfoErrorDialogOkButton": "Ok",
   "eventDetailsTicketPurchaseUserNotAuthorizedErrorTitle": "Authorization is required",
   "eventDetailsTicketPurchaseUserNotAuthorizedErrorDescription": "To purchase a ticket, please log in or register first",
   "eventDetailsTicketPurchaseUserNotAuthorizedErrorButton": "OK",
