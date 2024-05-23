@@ -16,7 +16,7 @@ class Event {
   final EventDate startDate;
   final EventDate endDate;
 
-  Event(
+  const Event(
     this.id,
     this.name,
     this.description,

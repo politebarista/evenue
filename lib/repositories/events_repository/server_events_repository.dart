@@ -1,14 +1,17 @@
 import 'dart:convert';
 
+import 'package:evenue/features/event_details/models/detailed_event.dart';
+
+import 'events_repository.dart';
+
 import 'package:evenue/common/definition/app_definition.dart';
 import 'package:evenue/models/event.dart';
 import 'package:http/http.dart' as http;
 
-// TODO: Reform the api into a repository
-class EventsRepository {
+class ServerEventsRepository implements EventsRepository {
   final AppDefinition _appDef;
 
-  EventsRepository(this._appDef);
+  ServerEventsRepository(this._appDef);
 
   Future<List<Event>> getEvents({String? cityId}) async {
     final getEventsUrl = 'getEvents';
@@ -28,5 +31,21 @@ class EventsRepository {
     }
 
     return events;
+  }
+
+  Future<DetailedEvent?> getDetailedEvent({String? eventId}) async {
+    final getEventsUrl = 'getDetailedEvent';
+    final url = Uri.parse(_appDef.baseUrl + getEventsUrl).replace(
+      queryParameters: {'eventId': eventId},
+    );
+    final response = await http.get(
+      url,
+      headers: {'Content-Type': 'application/json; charset=UTF-8'},
+    );
+
+    final body = jsonDecode(response.body);
+    final detailedEvent = DetailedEvent.fromJson(body);
+
+    return detailedEvent;
   }
 }

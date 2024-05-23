@@ -5,15 +5,15 @@ import 'package:evenue/common/ui/common_ui_provider.dart';
 import 'package:evenue/common/ui/constants.dart';
 import 'package:evenue/common/ui/custom_color_scheme.dart';
 import 'package:evenue/common/ui/custom_text_styles.dart';
+import 'package:evenue/features/event_details/event_details_screen.dart';
 import 'package:evenue/models/event.dart';
-import 'package:evenue/features/event_details/event_details_widget.dart';
 import 'package:flutter/material.dart';
 
-class EventWidget extends StatelessWidget {
+class EventCard extends StatelessWidget {
   final Event event;
   final double cardWidth;
 
-  const EventWidget({
+  const EventCard({
     required this.event,
     required this.cardWidth,
     Key? key,
@@ -22,7 +22,7 @@ class EventWidget extends StatelessWidget {
   void _navigateToDetails(BuildContext context) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => EventDetailsWidget(event),
+          builder: (context) => EventDetailsScreen(event),
         ),
       );
 

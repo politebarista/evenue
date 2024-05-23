@@ -1,17 +1,9 @@
-import 'package:evenue/common/ui/indent_widget.dart';
-import 'package:evenue/event_sorting/event_sorting_by_date.dart';
-import 'package:evenue/event_sorting/event_sorting_by_name.dart';
-import 'package:evenue/event_sorting/event_sorting_by_price.dart';
-import 'package:evenue/features/events/event_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
+part of 'events_screen.dart';
 
-import 'events_bloc.dart';
-
-class EventsListWidget extends StatelessWidget {
+class _EventsListWidget extends StatelessWidget {
   final EventsDefaultState state;
 
-  const EventsListWidget({required this.state, Key? key}) : super(key: key);
+  const _EventsListWidget({required this.state, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +96,7 @@ class EventsListWidget extends StatelessWidget {
               child: LayoutBuilder(
                 builder: (context, constraints) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: EventWidget(
+                  child: EventCard(
                     event: state.events[index],
                     cardWidth: constraints.maxWidth,
                   ),
