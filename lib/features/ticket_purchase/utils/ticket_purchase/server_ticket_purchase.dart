@@ -15,7 +15,6 @@ final class ServerTicketPurchase implements TicketPurchase {
     final requestBody = jsonEncode(<String, dynamic>{
       'eventId': eventId,
     });
-
     final response = await http.post(
       Uri.parse(_appDef.baseUrl + 'ticket/checkPurchaseOption'),
       headers: {'Content-Type': 'application/json; charset=UTF-8'},
@@ -23,14 +22,13 @@ final class ServerTicketPurchase implements TicketPurchase {
     );
 
     final bool decodedResponseBody = jsonDecode(response.body);
-
     return decodedResponseBody;
   }
 
   Future<String> bookTicketAndGetPaymentId(
-    BankCard bankCard,
-    String eventId,
-    String customerEmail,
+    final BankCard bankCard,
+    final String eventId,
+    final String customerEmail,
   ) async {
     final requestBody = jsonEncode(<String, dynamic>{
       'cardNumber': bankCard.cardNumber,
@@ -58,8 +56,8 @@ final class ServerTicketPurchase implements TicketPurchase {
 
   @override
   Future<void> confirmPurchase(
-    String paymentId,
-    String confirmationCode,
+    final String paymentId,
+    final String confirmationCode,
   ) async {
     final requestBody = jsonEncode(<String, dynamic>{
       'awaitingPaymentTicketId': paymentId,

@@ -3,7 +3,7 @@ part of '../event_details_screen.dart';
 class _EventDetailsInfoWidget extends StatelessWidget {
   final DetailedEvent detailedEvent;
 
-  const _EventDetailsInfoWidget(this.detailedEvent, {super.key});
+  const _EventDetailsInfoWidget(this.detailedEvent);
 
   void _onBuyTicketButtonPressed(BuildContext context) {
     if (context.read<UserStore>().isUserAuthorized) {
@@ -31,9 +31,7 @@ class _EventDetailsInfoWidget extends StatelessWidget {
           ),
           actions: [
             BasicDialogAction(
-              title: Text(S
-                  .of(context)
-                  .eventDetailsTicketPurchaseUserNotAuthorizedErrorButton),
+              title: Text(S.of(context).eventDetailsTicketPurchaseUserNotAuthorizedErrorButton),
               onPressed: () {
                 Navigator.of(context, rootNavigator: true).pop();
               },

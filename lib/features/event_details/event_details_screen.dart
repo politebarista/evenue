@@ -19,6 +19,7 @@ import 'package:evenue/stores/user_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
+// ignore: unnecessary_import
 import 'package:provider/provider.dart';
 
 import 'bloc/event_details_bloc.dart';

@@ -25,8 +25,12 @@ class EventDetailsBloc extends Bloc<EventDetailsEvent, EventDetailsState> {
         eventId: event.event.id,
       );
 
-      emit(EventDetailsInfoState(detailedEvent!));
-    } catch (e, stackTrace) {
+      emit(
+        detailedEvent != null
+          ? EventDetailsInfoState(detailedEvent)
+          : EventDetailsErrorState(),
+      );
+    } catch (e) {
       // TODO: add error logging
       emit(EventDetailsErrorState());
     }

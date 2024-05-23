@@ -60,55 +60,53 @@ class EnteringPurchaseDataScreen extends StatelessWidget {
           shape: CircleBorder(),
         ),
       ),
-      body: SafeArea(
-        child: BlocProvider<EnteringPurchaseDataBloc>(
-          create: (context) => EnteringPurchaseDataBloc(
-            context.read<TicketPurchase>(),
-            eventId,
-          ),
-          child: BlocConsumer<EnteringPurchaseDataBloc, EnteringPurchaseDataState>(
-            buildWhen: (_, current) => current is EnteringPurchaseDataPendingState ||
-              current is EnteringPurchaseDataEnterDataState,
-            listenWhen: (_, current) => current is EnteringPurchaseDataErrorState ||
-              current is EnteringPurchaseDataSuccessfullyState,
-            builder: (context, state) {
-              if (state is EnteringPurchaseDataPendingState) {
-                return Center(child: PendingWidget());
-              } else if (state is EnteringPurchaseDataEnterDataState) {
-                return _EnteringPurchaseDataEnterDataWidget();
-              } else {
-                throw UnimplementedError();
-              }
-            },
-            listener: (context, state) {
-              if (state is EnteringPurchaseDataErrorState) {
-                final errorText = switch (state.error) {
-                  NoTicketsLeftForEventError _ => S.of(context).ticketPurchaseNoTicketsLeftForEventError,
-                  IncorrectPaymentCardInformationError _ => S.of(context).ticketPurchaseIncorrectPaymentCardInformationError,
-                  IncorrectEventInformationError _ => S.of(context).ticketPurchaseIncorrectEventInformationError,
-                  IncorrectCustomerInformationError _ => S.of(context).ticketPurchaseIncorrectCustomerInformationError,
-                  _ => S.of(context).ticketPurchaseUnknownError,
-                };
-                final isErrorCritical = switch (state.error) {
-                  IncorrectPaymentCardInformationError _ => false,
-                  IncorrectCustomerInformationError _ => false,
-                  _ => true,
-                };
+      body: BlocProvider<EnteringPurchaseDataBloc>(
+        create: (context) => EnteringPurchaseDataBloc(
+          context.read<TicketPurchase>(),
+          eventId,
+        ),
+        child: BlocConsumer<EnteringPurchaseDataBloc, EnteringPurchaseDataState>(
+          buildWhen: (_, current) => current is EnteringPurchaseDataPendingState ||
+            current is EnteringPurchaseDataEnterDataState,
+          listenWhen: (_, current) => current is EnteringPurchaseDataErrorState ||
+            current is EnteringPurchaseDataSuccessfullyState,
+          builder: (context, state) {
+            if (state is EnteringPurchaseDataPendingState) {
+              return Center(child: PendingWidget());
+            } else if (state is EnteringPurchaseDataEnterDataState) {
+              return _EnteringPurchaseDataEnterDataWidget();
+            } else {
+              throw UnimplementedError();
+            }
+          },
+          listener: (context, state) {
+            if (state is EnteringPurchaseDataErrorState) {
+              final errorText = switch (state.error) {
+                NoTicketsLeftForEventError _ => S.of(context).ticketPurchaseNoTicketsLeftForEventError,
+                IncorrectPaymentCardInformationError _ => S.of(context).ticketPurchaseIncorrectPaymentCardInformationError,
+                IncorrectEventInformationError _ => S.of(context).ticketPurchaseIncorrectEventInformationError,
+                IncorrectCustomerInformationError _ => S.of(context).ticketPurchaseIncorrectCustomerInformationError,
+                _ => S.of(context).ticketPurchaseUnknownError,
+              };
+              final isErrorCritical = switch (state.error) {
+                IncorrectPaymentCardInformationError _ => false,
+                IncorrectCustomerInformationError _ => false,
+                _ => true,
+              };
 
-                _showErrorDialog(context, errorText, isErrorCritical);
-              } else if (state is EnteringPurchaseDataSuccessfullyState) {
-                Navigator.of(context).push<void>(
-                  MaterialPageRoute(
-                    builder: (context) => ConfirmPurchaseScreen(
-                      state.paymentId,
-                    ),
+              _showErrorDialog(context, errorText, isErrorCritical);
+            } else if (state is EnteringPurchaseDataSuccessfullyState) {
+              Navigator.of(context).push<void>(
+                MaterialPageRoute(
+                  builder: (context) => ConfirmPurchaseScreen(
+                    state.paymentId,
                   ),
-                );
-              } else {
-                throw UnimplementedError();
-              }
-            },
-          ),
+                ),
+              );
+            } else {
+              throw UnimplementedError();
+            }
+          },
         ),
       ),
     );

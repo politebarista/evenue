@@ -30,7 +30,6 @@ class _TicketPurchaseScreenState extends State<TicketPurchaseScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Provider<TicketPurchase>(
       create: (context) => ServerTicketPurchase(context.read<Config>().appDef),
       child: WillPopScope(

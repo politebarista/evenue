@@ -1,6 +1,7 @@
 analyzer:
   exclude:
     - lib/models/*.g.dart
+    - lib/features/event_details/models/*.g.dart
   plugins:
     - dart_code_metrics
 
