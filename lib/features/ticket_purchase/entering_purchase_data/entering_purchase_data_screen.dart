@@ -1,4 +1,5 @@
 import 'package:evenue/common/email_helper.dart';
+import 'package:evenue/common/ui/custom_color_scheme.dart';
 import 'package:evenue/common/ui/custom_text_field.dart';
 import 'package:evenue/common/ui/evenue_button.dart';
 import 'package:evenue/common/ui/evenue_dialog.dart';
@@ -55,7 +56,7 @@ class EnteringPurchaseDataScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(eventName),
         leading: MaterialButton(
-          child: Icon(Icons.arrow_back, color: Colors.white),
+          child: Icon(Icons.arrow_back, color: CustomColorScheme.primaryColor),
           onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
           shape: CircleBorder(),
         ),

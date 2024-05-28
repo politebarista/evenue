@@ -10,8 +10,8 @@ Future<T?> showEvenueDialog<T>({
   bool canPop = true,
 }) => showPlatformDialog<T>(
   context: context,
-  builder: (_) => WillPopScope(
-    onWillPop: () async => canPop,
+  builder: (_) => PopScope(
+    canPop: canPop,
     child: BasicDialogAlert(
       title: Text(
         title,

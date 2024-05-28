@@ -32,15 +32,17 @@ class _TicketPurchaseScreenState extends State<TicketPurchaseScreen> {
   Widget build(BuildContext context) {
     return Provider<TicketPurchase>(
       create: (context) => ServerTicketPurchase(context.read<Config>().appDef),
-      child: WillPopScope(
+      child: PopScope(
+        canPop: false,
         // ignore: prefer-extracting-callbacks
-        onWillPop: () async {
+        onPopInvoked: (didPop) {
+          if (didPop) return;
+
           if (navigatorKey.currentState!.canPop()) {
             navigatorKey.currentState!.pop();
           } else {
             Navigator.of(context).pop();
           }
-          return false;
         },
         child: Navigator(
           key: navigatorKey,

@@ -10,14 +10,13 @@ class CustomTheme {
     textTheme: _customTextTheme.getCustomTextTheme(),
     scaffoldBackgroundColor: CustomColorScheme.backgroundColor,
     colorScheme: ColorScheme(
-      onBackground: Colors.yellow,
-      onSurface: Colors.green,
-      surface: Colors.brown,
+      onSurface: CustomColorScheme.primaryColor,
+      surface: CustomColorScheme.surfaceColor,
       secondary: CustomColorScheme.secondaryColor,
       onSecondary: CustomColorScheme.backgroundColor,
       brightness: Brightness.light,
       error: Colors.orange,
-      background: Colors.cyan,
+      // ignore: no-equal-arguments
       primary: CustomColorScheme.primaryColor,
       // ignore: no-equal-arguments
       onPrimary: CustomColorScheme.backgroundColor,
