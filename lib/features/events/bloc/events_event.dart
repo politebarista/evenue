@@ -3,10 +3,10 @@ part of 'events_bloc.dart';
 @immutable
 abstract class EventsEvent {}
 
-class GetEventsEvent extends EventsEvent {
-  final String? cityId;
+class LoadEventsEvent extends EventsEvent {
+  final List<Event> oldEvents;
 
-  GetEventsEvent(this.cityId);
+  LoadEventsEvent(this.oldEvents);
 }
 
 class SortEventsEvent extends EventsEvent {

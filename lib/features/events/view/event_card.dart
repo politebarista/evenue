@@ -26,20 +26,20 @@ class EventCard extends StatelessWidget {
         ),
       );
 
+  // In this widget "content" refers to the size of the card without inner padding
   @override
   Widget build(BuildContext context) {
-    final double paddingAroundContent = 4;
-    final double paddingAroundInfo = 6;
+    const double paddingAroundContent = 4, paddingAroundInfo = 6;
     final double contentWidth = cardWidth - (paddingAroundContent * 2);
     final double contentSection = contentWidth / 3;
 
     final double imageWidth = contentSection;
     final double imageHeight = imageWidth;
+    final double infoAreaWidth = contentSection * 2;
 
-    final contentHeight = imageHeight + (paddingAroundContent * 2);
+    final cardHeight = imageHeight + (paddingAroundContent * 2);
 
-    final int descriptionMaxLines = 3;
-
+    const int descriptionMaxLines = 2;
     return GestureDetector(
       onTap: () => _navigateToDetails(context),
       child: Container(
@@ -50,11 +50,11 @@ class EventCard extends StatelessWidget {
           boxShadow: commonUiProvider.shadow,
         ),
         width: cardWidth,
-        height: contentHeight,
+        height: cardHeight,
         child: Row(
           children: [
             Container(
-              width: contentSection * 2,
+              width: infoAreaWidth,
               child: Padding(
                 padding: EdgeInsets.all(paddingAroundInfo),
                 child: Column(

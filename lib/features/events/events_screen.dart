@@ -4,14 +4,16 @@ import 'package:evenue/event_sorting/event_sorting_by_date.dart';
 import 'package:evenue/event_sorting/event_sorting_by_name.dart';
 import 'package:evenue/event_sorting/event_sorting_by_price.dart';
 import 'package:evenue/features/city_choice/city_choice_screen.dart';
-import 'package:evenue/features/events/events_bloc.dart';
+import 'package:evenue/models/event.dart';
 import 'package:evenue/stores/repositories_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'event_card.dart';
+import 'bloc/events_bloc.dart';
+import 'view/event_card.dart';
 
-part 'events_list_widget.dart';
+part 'view/events_list_widget.dart';
+part 'view/sorting_selection_widget.dart';
 
 class EventsScreen extends StatelessWidget {
   final String cityId;
@@ -39,8 +41,9 @@ class EventsScreen extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => EventsBloc(
+          cityId,
           context.read<RepositoriesStore>().eventsRepository,
-        )..add(GetEventsEvent(cityId)),
+        )..add(LoadEventsEvent([])),
         child: Scaffold(
           body: BlocBuilder<EventsBloc, EventsState>(
             builder: (context, state) {

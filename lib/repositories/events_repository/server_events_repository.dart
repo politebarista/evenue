@@ -1,36 +1,40 @@
 import 'dart:convert';
 
 import 'package:evenue/features/event_details/models/detailed_event.dart';
-
+import 'package:evenue/models/events_info.dart';
 import 'events_repository.dart';
-
 import 'package:evenue/common/definition/app_definition.dart';
-import 'package:evenue/models/event.dart';
 import 'package:http/http.dart' as http;
 
 class ServerEventsRepository implements EventsRepository {
+  static const _defaultSkipCount = 0, _defaultTakeCount = 25;
+
   final AppDefinition _appDef;
 
   ServerEventsRepository(this._appDef);
 
-  Future<List<Event>> getEvents({String? cityId}) async {
-    final getEventsUrl = 'getEvents';
+  Future<EventsInfo> getEventsInfo({
+    String? cityId,
+    int skipCount = _defaultSkipCount,
+    int takeCount = _defaultTakeCount,
+  }) async {
+    final getEventsUrl = 'getEventsInfo';
 
-    final requestBody = jsonEncode(<String, dynamic>{
+    final queryParameters = <String, dynamic>{
       'cityId': cityId,
-    });
-    final response = await http.post(
-      Uri.parse(_appDef.baseUrl + getEventsUrl),
+      'skipCount': skipCount.toString(),
+      'takeCount': takeCount.toString(),
+    };
+    final response = await http.get(
+      Uri.parse(_appDef.baseUrl + getEventsUrl).replace(
+        queryParameters: queryParameters,
+      ),
       headers: {'Content-Type': 'application/json; charset=UTF-8'},
-      body: requestBody,
     );
     final body = jsonDecode(response.body);
-    final events = <Event>[];
-    for (Map<String, dynamic> event in body) {
-      events.add(Event.fromJson(event));
-    }
+    final eventsInfo = EventsInfo.fromJson(body);
 
-    return events;
+    return eventsInfo;
   }
 
   Future<DetailedEvent?> getDetailedEvent({String? eventId}) async {

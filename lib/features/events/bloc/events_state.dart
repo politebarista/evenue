@@ -10,11 +10,12 @@ class EventsPendingState extends EventsState {
 
 class EventsDefaultState extends EventsState {
   final List<Event> events;
+  final int eventsTotal;
 
   @override
-  List<Object> get props => [events];
+  List<Object> get props => [events, eventsTotal];
 
-  EventsDefaultState(this.events);
+  EventsDefaultState(this.events, this.eventsTotal);
 }
 
 class EventsErrorState extends EventsState {
