@@ -45,27 +45,32 @@ class _EventsListWidgetState extends State<_EventsListWidget> {
         // _SortingSelectionWidget(events: state.events),
         // TODO: do the calculation of the height of the cards at this level and pass the value to the itemExtent in the builder
         Expanded(
-          child: ListView.builder(
-            controller: _scrollController,
-            itemBuilder: (context, index) => index == widget.state.events.length && !isAllEventsDisplayed
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Center(child: PendingWidget()),
-                  )
-                : IndentWidget(
-                    child: LayoutBuilder(
-                      builder: (context, constraints) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: EventCard(
-                          event: widget.state.events[index],
-                          cardWidth: constraints.maxWidth,
+          child: RefreshIndicator(
+            onRefresh: () async {
+              context.read<EventsBloc>().add(RefreshEventsEvent());
+            },
+            child: ListView.builder(
+              controller: _scrollController,
+              itemBuilder: (context, index) => index == widget.state.events.length && !isAllEventsDisplayed
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Center(child: PendingWidget()),
+                    )
+                  : IndentWidget(
+                      child: LayoutBuilder(
+                        builder: (context, constraints) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          child: EventCard(
+                            event: widget.state.events[index],
+                            cardWidth: constraints.maxWidth,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-            itemCount: isAllEventsDisplayed
-                ? widget.state.events.length
-                : widget.state.events.length + 1,
+              itemCount: isAllEventsDisplayed
+                  ? widget.state.events.length
+                  : widget.state.events.length + 1,
+            ),
           ),
         ),
       ],

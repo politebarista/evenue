@@ -15,3 +15,5 @@ class SortEventsEvent extends EventsEvent {
 
   SortEventsEvent(this.events, this.sorting);
 }
+
+class RefreshEventsEvent extends EventsEvent {}

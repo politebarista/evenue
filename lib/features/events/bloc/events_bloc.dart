@@ -20,6 +20,7 @@ class EventsBloc extends Bloc<EventsEvent, EventsState> {
         super(EventsPendingState()) {
     on<LoadEventsEvent>(_loadEvents);
     // on<SortEventsEvent>(_sortEvents);
+    on<RefreshEventsEvent>(_refreshEvents);
   }
 
   _loadEvents(LoadEventsEvent event, Emitter<EventsState> emit) async {
@@ -50,4 +51,9 @@ class EventsBloc extends Bloc<EventsEvent, EventsState> {
   //
   //   emit(EventsDefaultState(sortedEvents, _cityId));
   // }
+
+  _refreshEvents(RefreshEventsEvent _, Emitter<EventsState> emit) async {
+    emit(EventsPendingState());
+    add(LoadEventsEvent([]));
+  }
 }
