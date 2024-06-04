@@ -9,13 +9,15 @@ import 'package:evenue/features/event_details/event_details_screen.dart';
 import 'package:evenue/models/event.dart';
 import 'package:flutter/material.dart';
 
+part 'event_card_sizes.dart';
+
 class EventCard extends StatelessWidget {
   final Event event;
-  final double cardWidth;
+  final EventCardSizes cardSizes;
 
   const EventCard({
     required this.event,
-    required this.cardWidth,
+    required this.cardSizes,
     Key? key,
   }) : super(key: key);
 
@@ -26,37 +28,25 @@ class EventCard extends StatelessWidget {
         ),
       );
 
-  // In this widget "content" refers to the size of the card without inner padding
   @override
   Widget build(BuildContext context) {
-    const double paddingAroundContent = 4, paddingAroundInfo = 6;
-    final double contentWidth = cardWidth - (paddingAroundContent * 2);
-    final double contentSection = contentWidth / 3;
-
-    final double imageWidth = contentSection;
-    final double imageHeight = imageWidth;
-    final double infoAreaWidth = contentSection * 2;
-
-    final cardHeight = imageHeight + (paddingAroundContent * 2);
-
-    const int descriptionMaxLines = 2;
     return GestureDetector(
       onTap: () => _navigateToDetails(context),
       child: Container(
-        padding: EdgeInsets.all(paddingAroundContent),
+        padding: EdgeInsets.all(cardSizes.paddingAroundContent),
         decoration: BoxDecoration(
           color: CustomColorScheme.backgroundColor,
           borderRadius: BorderRadius.circular(defaultBorderRadius),
           boxShadow: commonUiProvider.shadow,
         ),
-        width: cardWidth,
-        height: cardHeight,
+        width: cardSizes.cardWidth,
+        height: cardSizes.cardHeight,
         child: Row(
           children: [
             Container(
-              width: infoAreaWidth,
+              width: cardSizes.infoAreaWidth,
               child: Padding(
-                padding: EdgeInsets.all(paddingAroundInfo),
+                padding: EdgeInsets.all(cardSizes.paddingAroundInfo),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -84,7 +74,7 @@ class EventCard extends StatelessWidget {
                     Text(
                       event.description,
                       style: customTextStyles.cardDescription,
-                      maxLines: descriptionMaxLines,
+                      maxLines: cardSizes.descriptionMaxLines,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Spacer(),
@@ -99,8 +89,8 @@ class EventCard extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(defaultBorderRadius - 1),
               child: CachedNetworkImage(
-                width: imageWidth,
-                height: imageHeight,
+                width: cardSizes.imageWidth,
+                height: cardSizes.imageHeight,
                 fit: BoxFit.cover,
                 imageUrl: event.imageUrl,
                 errorWidget: (_, __, ___) => Image.asset(

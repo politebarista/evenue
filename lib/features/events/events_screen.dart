@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/events_bloc.dart';
-import 'view/event_card.dart';
+import 'view/event_card/event_card.dart';
 
 part 'view/events_list_widget.dart';
 part 'view/sorting_selection_widget.dart';
@@ -52,6 +52,7 @@ class EventsScreen extends StatelessWidget {
               } else if (state is EventsDefaultState) {
                 return _EventsListWidget(state: state);
               } else if (state is EventsErrorState) {
+                // TODO: implement a more informative error screen
                 return Text('error');
               } else {
                 throw UnimplementedError();

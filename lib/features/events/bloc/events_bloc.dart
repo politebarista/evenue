@@ -39,6 +39,7 @@ class EventsBloc extends Bloc<EventsEvent, EventsState> {
       ));
       _isEventsLoading = false;
     } catch (e) {
+      // TODO: add error logging
       _isEventsLoading = false;
       emit(EventsErrorState());
     }
