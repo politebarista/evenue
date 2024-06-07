@@ -1,8 +1,6 @@
+import 'package:evenue/common/events_sorting.dart';
 import 'package:evenue/common/ui/indent_widget.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
-import 'package:evenue/event_sorting/event_sorting_by_date.dart';
-import 'package:evenue/event_sorting/event_sorting_by_name.dart';
-import 'package:evenue/event_sorting/event_sorting_by_price.dart';
 import 'package:evenue/features/city_choice/city_choice_screen.dart';
 import 'package:evenue/models/event.dart';
 import 'package:evenue/stores/repositories_store.dart';

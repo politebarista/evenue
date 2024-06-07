@@ -17,8 +17,7 @@ class _SortingSelectionWidget extends StatelessWidget {
               child: MaterialButton(
                 onPressed: () => context.read<EventsBloc>().add(
                   SortEventsEvent(
-                    events,
-                    EventSortingByDate(),
+                    EventsSorting.byDateAscending,
                   ),
                 ),
                 child: Text('sort by date asc'),
@@ -29,8 +28,7 @@ class _SortingSelectionWidget extends StatelessWidget {
               child: MaterialButton(
                 onPressed: () => context.read<EventsBloc>().add(
                   SortEventsEvent(
-                    events,
-                    EventSortingByDate(isAscending: false),
+                    EventsSorting.byDateDescending,
                   ),
                 ),
                 child: Text('sort by date desc'),
@@ -41,8 +39,7 @@ class _SortingSelectionWidget extends StatelessWidget {
               child: MaterialButton(
                 onPressed: () => context.read<EventsBloc>().add(
                   SortEventsEvent(
-                    events,
-                    EventSortingByName(),
+                    EventsSorting.byNameAscending,
                   ),
                 ),
                 child: Text('sort by name asc'),
@@ -53,35 +50,10 @@ class _SortingSelectionWidget extends StatelessWidget {
               child: MaterialButton(
                 onPressed: () => context.read<EventsBloc>().add(
                   SortEventsEvent(
-                    events,
-                    EventSortingByName(isAscending: false),
+                    EventsSorting.byNameDescending,
                   ),
                 ),
                 child: Text('sort by name desc'),
-              ),
-            ),
-            Container(
-              color: Colors.orange,
-              child: MaterialButton(
-                onPressed: () => context.read<EventsBloc>().add(
-                  SortEventsEvent(
-                    events,
-                    EventSortingByPrice(),
-                  ),
-                ),
-                child: Text('sort by price asc'),
-              ),
-            ),
-            Container(
-              color: Colors.tealAccent,
-              child: MaterialButton(
-                onPressed: () => context.read<EventsBloc>().add(
-                  SortEventsEvent(
-                    events,
-                    EventSortingByPrice(isAscending: false),
-                  ),
-                ),
-                child: Text('sort by price desc'),
               ),
             ),
           ],

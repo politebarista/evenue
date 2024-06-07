@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:evenue/common/events_sorting.dart';
 import 'package:evenue/features/event_details/models/detailed_event.dart';
 import 'package:evenue/models/events_info.dart';
 import 'events_repository.dart';
@@ -14,16 +15,20 @@ class ServerEventsRepository implements EventsRepository {
   ServerEventsRepository(this._appDef);
 
   Future<EventsInfo> getEventsInfo({
-    String? cityId,
-    int skipCount = _defaultSkipCount,
-    int takeCount = _defaultTakeCount,
+    required String? cityId,
+    required int? skipCount,
+    required int? takeCount,
+    required EventsSorting? eventsSorting,
   }) async {
-    final getEventsUrl = 'getEventsInfo';
+    skipCount ??= _defaultSkipCount;
+    takeCount ??= _defaultTakeCount;
 
+    final getEventsUrl = 'getEventsInfo';
     final queryParameters = <String, dynamic>{
       'cityId': cityId,
       'skipCount': skipCount.toString(),
       'takeCount': takeCount.toString(),
+      'eventsSorting': eventsSorting?.name,
     };
     final response = await http.get(
       Uri.parse(_appDef.baseUrl + getEventsUrl).replace(
@@ -37,7 +42,7 @@ class ServerEventsRepository implements EventsRepository {
     return eventsInfo;
   }
 
-  Future<DetailedEvent?> getDetailedEvent({String? eventId}) async {
+  Future<DetailedEvent?> getDetailedEvent({required String? eventId}) async {
     final getEventsUrl = 'getDetailedEvent';
     final url = Uri.parse(_appDef.baseUrl + getEventsUrl).replace(
       queryParameters: {'eventId': eventId},

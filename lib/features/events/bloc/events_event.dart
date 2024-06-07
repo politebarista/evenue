@@ -5,15 +5,18 @@ abstract class EventsEvent {}
 
 class LoadEventsEvent extends EventsEvent {
   final List<Event> oldEvents;
+  final EventsSorting sorting;
 
-  LoadEventsEvent(this.oldEvents);
+  LoadEventsEvent(
+    this.oldEvents, {
+    this.sorting = EventsSorting.without,
+  });
 }
 
 class SortEventsEvent extends EventsEvent {
-  final List<Event> events;
-  final EventSorting sorting;
+  final EventsSorting sorting;
 
-  SortEventsEvent(this.events, this.sorting);
+  SortEventsEvent(this.sorting);
 }
 
 class RefreshEventsEvent extends EventsEvent {}

@@ -46,8 +46,7 @@ class _EventsListWidgetState extends State<_EventsListWidget> {
 
     return Column(
       children: [
-        // TODO: implement sorting on the backend and uncomment the line, because at the moment only the received events are sorted, and all should be
-        // _SortingSelectionWidget(events: state.events),
+        _SortingSelectionWidget(events: widget.state.events),
         Expanded(
           child: LayoutBuilder(
             builder: (context, constraints) {

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:evenue/event_sorting/event_sorting.dart';
+import 'package:evenue/common/events_sorting.dart';
 import 'package:evenue/models/event.dart';
 import 'package:evenue/repositories/events_repository/events_repository.dart';
 import 'package:meta/meta.dart';
@@ -19,7 +19,7 @@ class EventsBloc extends Bloc<EventsEvent, EventsState> {
       : _cityId = cityId, _eventsRepository = eventsRepository,
         super(EventsPendingState()) {
     on<LoadEventsEvent>(_loadEvents);
-    // on<SortEventsEvent>(_sortEvents);
+    on<SortEventsEvent>(_sortEvents);
     on<RefreshEventsEvent>(_refreshEvents);
   }
 
@@ -31,6 +31,8 @@ class EventsBloc extends Bloc<EventsEvent, EventsState> {
       final eventsInfo = await _eventsRepository.getEventsInfo(
         cityId: _cityId,
         skipCount: event.oldEvents.length,
+        takeCount: null,
+        eventsSorting: event.sorting,
       );
 
       emit(EventsDefaultState(
@@ -45,13 +47,11 @@ class EventsBloc extends Bloc<EventsEvent, EventsState> {
     }
   }
 
-  // _sortEvents(SortEventsEvent event, Emitter<EventsState> emit) async {
-  //   emit(EventsPendingState());
-  //
-  //   final sortedEvents = event.sorting.sort(event.events);
-  //
-  //   emit(EventsDefaultState(sortedEvents, _cityId));
-  // }
+  _sortEvents(SortEventsEvent event, Emitter<EventsState> emit) {
+    emit(EventsPendingState());
+
+    add(LoadEventsEvent([], sorting: event.sorting));
+  }
 
   _refreshEvents(RefreshEventsEvent _, Emitter<EventsState> emit) async {
     emit(EventsPendingState());
