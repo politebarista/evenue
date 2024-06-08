@@ -50,6 +50,66 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Sorting`
+  String get eventsListSortButton {
+    return Intl.message(
+      'Sorting',
+      name: 'eventsListSortButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorting`
+  String get eventsListSortingWidgetTitle {
+    return Intl.message(
+      'Sorting',
+      name: 'eventsListSortingWidgetTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ascending dates`
+  String get eventsListSortingWidgetSortByDateAscending {
+    return Intl.message(
+      'Ascending dates',
+      name: 'eventsListSortingWidgetSortByDateAscending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Descending dates`
+  String get eventsListSortingWidgetSortByDateDescending {
+    return Intl.message(
+      'Descending dates',
+      name: 'eventsListSortingWidgetSortByDateDescending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ascending alphabet`
+  String get eventsListSortingWidgetSortByNameAscending {
+    return Intl.message(
+      'Ascending alphabet',
+      name: 'eventsListSortingWidgetSortByNameAscending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Descending alphabet`
+  String get eventsListSortingWidgetSortByNameDescending {
+    return Intl.message(
+      'Descending alphabet',
+      name: 'eventsListSortingWidgetSortByNameDescending',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Buy a ticket`
   String get eventDetailsBuyTicketAvailableButton {
     return Intl.message(

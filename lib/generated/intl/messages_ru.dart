@@ -97,6 +97,18 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Для совершения покупки билета пожалуйста сначала авторизуйтесь или зарегистрируйтесь"),
         "eventDetailsTicketPurchaseUserNotAuthorizedErrorTitle":
             MessageLookupByLibrary.simpleMessage("Необходима авторизация"),
+        "eventsListSortButton":
+            MessageLookupByLibrary.simpleMessage("Сортировка"),
+        "eventsListSortingWidgetSortByDateAscending":
+            MessageLookupByLibrary.simpleMessage("По возрастанию даты"),
+        "eventsListSortingWidgetSortByDateDescending":
+            MessageLookupByLibrary.simpleMessage("По убыванию даты"),
+        "eventsListSortingWidgetSortByNameAscending":
+            MessageLookupByLibrary.simpleMessage("По возрастанию алфавита"),
+        "eventsListSortingWidgetSortByNameDescending":
+            MessageLookupByLibrary.simpleMessage("По убыванию алфавита"),
+        "eventsListSortingWidgetTitle":
+            MessageLookupByLibrary.simpleMessage("Сортировка"),
         "evenueDialogDefaultButton": MessageLookupByLibrary.simpleMessage("Ок"),
         "ticketPurchaseIncorrectConfirmationPurchaseCodeError":
             MessageLookupByLibrary.simpleMessage(

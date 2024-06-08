@@ -97,6 +97,17 @@ class MessageLookup extends MessageLookupByLibrary {
                 "To purchase a ticket, please log in or register first"),
         "eventDetailsTicketPurchaseUserNotAuthorizedErrorTitle":
             MessageLookupByLibrary.simpleMessage("Authorization is required"),
+        "eventsListSortButton": MessageLookupByLibrary.simpleMessage("Sorting"),
+        "eventsListSortingWidgetSortByDateAscending":
+            MessageLookupByLibrary.simpleMessage("Ascending dates"),
+        "eventsListSortingWidgetSortByDateDescending":
+            MessageLookupByLibrary.simpleMessage("Descending dates"),
+        "eventsListSortingWidgetSortByNameAscending":
+            MessageLookupByLibrary.simpleMessage("Ascending alphabet"),
+        "eventsListSortingWidgetSortByNameDescending":
+            MessageLookupByLibrary.simpleMessage("Descending alphabet"),
+        "eventsListSortingWidgetTitle":
+            MessageLookupByLibrary.simpleMessage("Sorting"),
         "evenueDialogDefaultButton": MessageLookupByLibrary.simpleMessage("Ok"),
         "ticketPurchaseIncorrectConfirmationPurchaseCodeError":
             MessageLookupByLibrary.simpleMessage(

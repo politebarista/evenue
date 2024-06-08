@@ -1,8 +1,9 @@
 import 'package:evenue/common/events_sorting.dart';
+import 'package:evenue/common/ui/custom_text_styles.dart';
 import 'package:evenue/common/ui/indent_widget.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
 import 'package:evenue/features/city_choice/city_choice_screen.dart';
-import 'package:evenue/models/event.dart';
+import 'package:evenue/generated/l10n.dart';
 import 'package:evenue/stores/repositories_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +12,7 @@ import 'bloc/events_bloc.dart';
 import 'view/event_card/event_card.dart';
 
 part 'view/events_list_widget.dart';
-part 'view/sorting_selection_widget.dart';
+part 'view/sorting_modal_bottom_sheet.dart';
 
 class EventsScreen extends StatelessWidget {
   final String cityId;

@@ -1,5 +1,11 @@
 {
   "@@locale": "ru",
+  "eventsListSortButton": "Сортировка",
+  "eventsListSortingWidgetTitle": "Сортировка",
+  "eventsListSortingWidgetSortByDateAscending": "По возрастанию даты",
+  "eventsListSortingWidgetSortByDateDescending": "По убыванию даты",
+  "eventsListSortingWidgetSortByNameAscending": "По возрастанию алфавита",
+  "eventsListSortingWidgetSortByNameDescending": "По убыванию алфавита",
   "eventDetailsBuyTicketAvailableButton": "Купить билет",
   "eventDetailsBuyTicketUnavailableButton": "Нет билетов в продаже",
   "eventDetailsLoadingEventInfoErrorDialogTitle": "Упс.. Ошибка",

@@ -1,5 +1,11 @@
 {
   "@@locale": "en",
+  "eventsListSortButton": "Sorting",
+  "eventsListSortingWidgetTitle": "Sorting",
+  "eventsListSortingWidgetSortByDateAscending": "Ascending dates",
+  "eventsListSortingWidgetSortByDateDescending": "Descending dates",
+  "eventsListSortingWidgetSortByNameAscending": "Ascending alphabet",
+  "eventsListSortingWidgetSortByNameDescending": "Descending alphabet",
   "eventDetailsBuyTicketAvailableButton": "Buy a ticket",
   "eventDetailsBuyTicketUnavailableButton": "There are no tickets",
   "eventDetailsLoadingEventInfoErrorDialogTitle": "Oops.. Error",

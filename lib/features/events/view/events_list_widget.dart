@@ -45,8 +45,16 @@ class _EventsListWidgetState extends State<_EventsListWidget> {
         widget.state.events.length >= widget.state.eventsTotal;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _SortingSelectionWidget(events: widget.state.events),
+        // TODO: add sliver here to hide these buttons
+        // TODO: replace sorting with filters that are really useful for choosing events
+        IndentWidget(
+          child: OutlinedButton(
+            onPressed: () => _showSortingModalBottomSheet(context),
+            child: Text(S.of(context).eventsListSortButton),
+          ),
+        ),
         Expanded(
           child: LayoutBuilder(
             builder: (context, constraints) {
