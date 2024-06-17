@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:evenue/error_logger/error_logger.dart';
 import 'package:evenue/features/ticket_purchase/utils/ticket_purchase/ticket_purchase.dart';
 import 'package:evenue/features/ticket_purchase/utils/ticket_purchase_error.dart';
 import 'package:meta/meta.dart';
@@ -7,13 +8,17 @@ part 'entering_purchase_data_event.dart';
 
 part 'entering_purchase_data_state.dart';
 
-// TODO: add catch area logging
 class EnteringPurchaseDataBloc extends Bloc<EnteringPurchaseDataEvent, EnteringPurchaseDataState> {
+  final ErrorLogger _errorLogger;
   final TicketPurchase _ticketPurchase;
   final String _eventId;
 
-  EnteringPurchaseDataBloc(TicketPurchase ticketPurchase, String eventId)
-      : _ticketPurchase = ticketPurchase,
+  EnteringPurchaseDataBloc(
+    ErrorLogger errorLogger,
+    TicketPurchase ticketPurchase,
+    String eventId,
+  )   : _errorLogger = errorLogger,
+        _ticketPurchase = ticketPurchase,
         _eventId = eventId,
         super(EnteringPurchaseDataPendingState()) {
     on<_CheckPurchaseOption>(_checkPurchaseOption);
@@ -36,9 +41,11 @@ class EnteringPurchaseDataBloc extends Bloc<EnteringPurchaseDataEvent, EnteringP
             ? EnteringPurchaseDataEnterDataState()
             : EnteringPurchaseDataErrorState(NoTicketsLeftForEventError()),
       );
-    } on TicketPurchaseError catch (e) {
+    } on TicketPurchaseError catch (e, stackTrace) {
+      await _errorLogger.sendError(e, stackTrace);
       emit(EnteringPurchaseDataErrorState(e));
-    } catch (_) {
+    } catch (e, stackTrace) {
+      await _errorLogger.sendError(e, stackTrace);
       emit(EnteringPurchaseDataErrorState(TicketPurchaseUnknownError()));
     }
   }
@@ -55,9 +62,11 @@ class EnteringPurchaseDataBloc extends Bloc<EnteringPurchaseDataEvent, EnteringP
       );
 
       emit(EnteringPurchaseDataSuccessfullyState(paymentId));
-    } on TicketPurchaseError catch (e) {
+    } on TicketPurchaseError catch (e, stackTrace) {
+      await _errorLogger.sendError(e, stackTrace);
       emit(EnteringPurchaseDataErrorState(e));
-    } catch (_) {
+    } catch (e, stackTrace) {
+      await _errorLogger.sendError(e, stackTrace);
       emit(EnteringPurchaseDataErrorState(TicketPurchaseUnknownError()));
     }
   }

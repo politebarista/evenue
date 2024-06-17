@@ -10,6 +10,7 @@ import 'package:evenue/common/ui/evenue_button.dart';
 import 'package:evenue/common/ui/evenue_dialog.dart';
 import 'package:evenue/common/ui/indent_widget.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
+import 'package:evenue/error_logger/error_logger.dart';
 import 'package:evenue/features/event_details/models/detailed_event.dart';
 import 'package:evenue/features/ticket_purchase/ticket_purchase_screen.dart';
 import 'package:evenue/generated/l10n.dart';
@@ -37,6 +38,7 @@ class EventDetailsScreen extends StatelessWidget {
       appBar: AppBar(),
       body: BlocProvider(
         create: (_) => EventDetailsBloc(
+          context.read<ErrorLogger>(),
           event,
           context.read<RepositoriesStore>().eventsRepository,
         )..add(EventDetailsLoadDetailsEvent(event)),

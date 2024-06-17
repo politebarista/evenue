@@ -6,6 +6,7 @@ import 'package:evenue/common/ui/evenue_dialog.dart';
 import 'package:evenue/common/ui/indent_widget.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
 import 'package:evenue/common/ui/upper_case_text_input_formatter.dart';
+import 'package:evenue/error_logger/error_logger.dart';
 import 'package:evenue/features/ticket_purchase/entering_purchase_data/bloc/entering_purchase_data_bloc.dart';
 import 'package:evenue/features/ticket_purchase/utils/ticket_purchase/ticket_purchase.dart';
 import 'package:evenue/features/ticket_purchase/utils/ticket_purchase_error.dart';
@@ -63,6 +64,7 @@ class EnteringPurchaseDataScreen extends StatelessWidget {
       ),
       body: BlocProvider<EnteringPurchaseDataBloc>(
         create: (context) => EnteringPurchaseDataBloc(
+          context.read<ErrorLogger>(),
           context.read<TicketPurchase>(),
           eventId,
         ),

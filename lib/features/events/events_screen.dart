@@ -2,6 +2,7 @@ import 'package:evenue/common/events_sorting.dart';
 import 'package:evenue/common/ui/custom_text_styles.dart';
 import 'package:evenue/common/ui/indent_widget.dart';
 import 'package:evenue/common/ui/pending_widget.dart';
+import 'package:evenue/error_logger/error_logger.dart';
 import 'package:evenue/features/city_choice/city_choice_screen.dart';
 import 'package:evenue/generated/l10n.dart';
 import 'package:evenue/stores/repositories_store.dart';
@@ -40,6 +41,7 @@ class EventsScreen extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => EventsBloc(
+          context.read<ErrorLogger>(),
           cityId,
           context.read<RepositoriesStore>().eventsRepository,
         )..add(LoadEventsEvent([])),
